@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Save The Food</string>
     <string name="app_label_name">SaveFood</string>
+
+    <string name="btn_scan">SCAN</string>
+    <string name="btn_favorite">FAV</string>
+    <string name="btn_add">ADD</string>
 </resources>
