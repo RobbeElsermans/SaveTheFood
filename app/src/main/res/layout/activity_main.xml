@@ -68,8 +68,7 @@
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:text="@string/btn_scan"
-                    android:onClick="Scan_btn"
-                    tools:ignore="OnClick" />
+                    android:onClick="Scan_btn"/>
 
                 <Button
                     android:id="@+id/button3"
