@@ -40,9 +40,9 @@ public class Scanner extends AppCompatActivity {
                     @Override
                     public void run() {
                         resultqr.setText(result.getText());
-                        //returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getNumBits());
-                        //setResult(RESULT_OK, returnBarcode);
-                        //finish();
+                        returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getText());
+                        setResult(RESULT_OK, returnBarcode);
+                        finish();
                     }
                 });
             }

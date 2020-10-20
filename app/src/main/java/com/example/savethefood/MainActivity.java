@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Intent retrieveBarcode = new Intent(this, Scanner.class);
     private Intent sendBarcode = new Intent();
 
-    private int barcode = 0;
+    private String barcode = " ";
 
     public static final int BARCODE_REQUEST_FIND = 10;
     public static final int BARCODE_REQUEST_ADD = 11;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void scan(View view) {
 
-        startActivityForResult(retrieveBarcode, BARCODE_REQUEST_FIND);
+        startActivityForResult(new Intent(this,Scanner.class), BARCODE_REQUEST_FIND);
     }
 
     public void add(View view) {
@@ -48,15 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == BARCODE_REQUEST_FIND) {
             if (resultCode == RESULT_OK) {
-                barcode = data.getIntExtra(Scanner.EXTRA_RETURN_BARCODE, 0);
-                if (barcode != 0) {
+                barcode = data.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
+                    
                     sendBarcode.putExtra("Barcode", barcode);
                     Toast toast = Toast.makeText(this, barcode, Toast.LENGTH_SHORT);
                     toast.show();
-                } else {
-                    Toast toast = Toast.makeText(this, "Niet geldig", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
             }
             if (resultCode == RESULT_CANCELED) {
                 Toast toast = Toast.makeText(this, "Canceled",
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (requestCode == BARCODE_REQUEST_ADD) {
             if (resultCode == RESULT_OK) {
-                //Add barcode to API
+                //send intent to Add Activity
             }
             if (resultCode == RESULT_CANCELED) {
                 Toast toast = Toast.makeText(this, "Canceled",
