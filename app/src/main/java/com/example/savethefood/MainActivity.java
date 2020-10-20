@@ -13,14 +13,12 @@ import androidx.core.app.ActivityCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Intent retrieveBarcode = new Intent(this, Scanner.class);
     private Intent sendBarcode = new Intent();
 
     private String barcode = " ";
 
     public static final int BARCODE_REQUEST_FIND = 10;
     public static final int BARCODE_REQUEST_ADD = 11;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == BARCODE_REQUEST_FIND) {
             if (resultCode == RESULT_OK) {
                 barcode = data.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
-                    
-                    sendBarcode.putExtra("Barcode", barcode);
+
+                    //sendBarcode.putExtra("Barcode", barcode);
                     Toast toast = Toast.makeText(this, barcode, Toast.LENGTH_SHORT);
                     toast.show();
             }
