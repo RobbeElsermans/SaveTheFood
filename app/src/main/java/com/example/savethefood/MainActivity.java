@@ -13,9 +13,7 @@ import androidx.core.app.ActivityCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Intent sendBarcode = new Intent();
-
-    private String barcode = " ";
+    private Intent cameraScan;
 
     public static final int BARCODE_REQUEST_FIND = 10;
     public static final int BARCODE_REQUEST_ADD = 11;
@@ -24,22 +22,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cameraScan = new Intent(this,Scanner.class);
 
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
     }
 
     public void favorite(View view) {
     }
 
-    public void scan(View view) {
-
-        startActivityForResult(new Intent(this,Scanner.class), BARCODE_REQUEST_FIND);
+    public void scan(View view)
+    {
+        startActivity(cameraScan);
     }
+
 
     public void add(View view) {
 
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -68,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    */
 }

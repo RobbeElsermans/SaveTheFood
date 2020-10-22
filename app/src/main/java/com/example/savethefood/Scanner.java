@@ -16,7 +16,7 @@ import com.google.zxing.Result;
 public class Scanner extends AppCompatActivity {
 
     public final static String EXTRA_RETURN_BARCODE = "com.example.Scanner.RETURN_BARCODE";
-    Intent returnBarcode = new Intent();
+    Intent returnBarcode;
 
     CodeScanner codeScanner;
     CodeScannerView scannerview;
@@ -30,6 +30,8 @@ public class Scanner extends AppCompatActivity {
         codeScanner = new CodeScanner(this, scannerview);
         resultqr = findViewById(R.id.qrtestResults);
 
+        returnBarcode = new Intent(this, TestFindBarcode.class);
+        
         Intent ReceiveIntent = getIntent();
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -41,7 +43,7 @@ public class Scanner extends AppCompatActivity {
                     public void run() {
                         resultqr.setText(result.getText());
                         returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getText());
-                        setResult(RESULT_OK, returnBarcode);
+                        startActivity(returnBarcode);
                         finish();
                     }
                 });
