@@ -12,6 +12,7 @@ public class TestFindBarcode extends AppCompatActivity {
     private Intent recieveBarcode;
     private TextView barcode;
     private Intent cameraScan;
+    private APIBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
