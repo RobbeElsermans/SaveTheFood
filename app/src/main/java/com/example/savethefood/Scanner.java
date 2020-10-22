@@ -20,7 +20,6 @@ public class Scanner extends AppCompatActivity {
 
     CodeScanner codeScanner;
     CodeScannerView scannerview;
-    TextView resultqr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +27,9 @@ public class Scanner extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         scannerview = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerview);
-        resultqr = findViewById(R.id.qrtestResults);
 
         returnBarcode = new Intent(this, TestFindBarcode.class);
-        
+
         Intent ReceiveIntent = getIntent();
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -41,7 +39,6 @@ public class Scanner extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        resultqr.setText(result.getText());
                         returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getText());
                         startActivity(returnBarcode);
                         finish();
