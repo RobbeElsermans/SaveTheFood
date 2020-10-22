@@ -6,5 +6,5 @@ import retrofit2.http.Path;
 
 public interface FoodAPI {
     @GET("{barcode}")
-    Call<BarcodeInfo> getPosts(@Path("barcode") int barcode);
+    Call<BarcodeInfo> getPosts(@Path("barcode") String barcode);
 }

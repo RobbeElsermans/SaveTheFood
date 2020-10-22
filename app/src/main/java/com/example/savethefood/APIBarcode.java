@@ -32,7 +32,7 @@ public class APIBarcode {
     }
 
     public void retrieveInfo(){
-        Call<BarcodeInfo> call = ApiBarcode.getPosts(Integer.parseInt(barcode));
+        Call<BarcodeInfo> call = ApiBarcode.getPosts(barcode.toString());
 
         call.enqueue(new Callback<BarcodeInfo>() {
             @Override
