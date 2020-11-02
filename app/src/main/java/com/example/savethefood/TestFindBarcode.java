@@ -19,10 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TestFindBarcode extends AppCompatActivity {
 
-    //private BarcodeInfo data;
-    private Intent recieveBarcode;
-    private TextView barcode;
-    private TextView dataBarcode;
+    private TextView nameProduct;
 
     FoodAPI ApiBarcode;
 
@@ -33,7 +30,7 @@ public class TestFindBarcode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_find_barcode);
+        setContentView(R.layout.activity_barcode_info);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -45,12 +42,13 @@ public class TestFindBarcode extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
 
 
-        barcode = findViewById(R.id.text_Barcode);
-        dataBarcode = findViewById(R.id.text_info);
+        TextView barcode = findViewById(R.id.text_Barcode);
+
 
         cameraScan = new Intent(this,Scanner.class);
 
-        recieveBarcode = getIntent();
+        //private BarcodeInfo data;
+        Intent recieveBarcode = getIntent();
 
         barcodeText = recieveBarcode.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
 
@@ -77,11 +75,11 @@ public class TestFindBarcode extends AppCompatActivity {
 
                     String message = "";
                     message += "Barcode: " + posten.getBarCode() + "\n";
-                    message += "Status_verbose: " + posten.getStatusVerbose() + "\n";
+                    message += "Naam: " + posten.getProduct().getName() + "\n";
                     message += "Status: " + posten.getStatus() + "\n";
 
-                    dataBarcode.append(message);
-
+                    nameProduct.append(message);
+                    url = posten.getProduct().getImage_url();
 
                 }
                 else
