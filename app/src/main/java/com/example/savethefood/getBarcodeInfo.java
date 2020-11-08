@@ -35,7 +35,7 @@ public class TestFindBarcode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_barcode_info);
+        setContentView(R.layout.activity_test_find_barcode);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -52,11 +52,9 @@ public class TestFindBarcode extends AppCompatActivity {
         urlProduct = findViewById(R.id.textview_url);
         productName = findViewById(R.id.textview_product_name);
 
-
         cameraScan = new Intent(this,Scanner.class);
 
-        //private BarcodeInfo data;
-        Intent recieveBarcode = getIntent();
+        recieveBarcode = getIntent();
 
         barcodeText = recieveBarcode.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
 
