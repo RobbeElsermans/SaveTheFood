@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
@@ -28,7 +27,7 @@ public class Scanner extends AppCompatActivity {
         scannerview = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerview);
 
-        returnBarcode = new Intent(this, TestFindBarcode.class);
+        returnBarcode = new Intent(this, getBarcodeInfo.class);
 
         Intent ReceiveIntent = getIntent();
 

@@ -24,6 +24,7 @@ public class TestFindBarcode extends AppCompatActivity {
     private TextView barcode;
     private TextView nutriscore;
     private TextView urlProduct;
+    private TextView productName;
 
     FoodAPI ApiBarcode;
 
@@ -49,6 +50,7 @@ public class TestFindBarcode extends AppCompatActivity {
         barcode = findViewById(R.id.textview_barcode);
         nutriscore = findViewById(R.id.textview_nutriscores);
         urlProduct = findViewById(R.id.textview_url);
+        productName = findViewById(R.id.textview_product_name);
 
 
         cameraScan = new Intent(this,Scanner.class);
@@ -58,7 +60,7 @@ public class TestFindBarcode extends AppCompatActivity {
 
         barcodeText = recieveBarcode.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
 
-        barcode.setText(barcodeText);
+        barcode.setText("barcode: " + barcodeText);
 
         retrieveInfo();
 
@@ -78,8 +80,13 @@ public class TestFindBarcode extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     BarcodeInfo posten = response.body();
-                    String nutriments = null;
-                    nutriments += "sugar: "+ posten.getStatusVerbose();
+                    String nutriments = "";
+                    nutriments += "energy: " + posten.getProduct().getNutriscore_data().getEnergy_value() + "kcal\n";
+                    nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
+                    nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
+
+                    urlProduct.setText(posten.getProduct().getImage_url_small());
+                    productName.setText(posten.getProduct().getName());
                     nutriscore.setText(nutriments);
 
 

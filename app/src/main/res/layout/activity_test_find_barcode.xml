@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestFindBarcode">
+    tools:context=".getBarcodeInfo">
 
     <Button
         android:id="@+id/btn_scan"
@@ -31,7 +31,7 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textview_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

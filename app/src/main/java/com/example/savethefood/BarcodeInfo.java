@@ -8,7 +8,7 @@ public class BarcodeInfo {
     @SerializedName("code")
     private String mBarcode;
     @SerializedName("status")
-    private int mStatus;
+    private double mStatus;
     @SerializedName("product")
     private Product product;
 
@@ -21,10 +21,9 @@ public class BarcodeInfo {
         return mBarcode;
     }
 
-    public int getStatus() {
+    public double getStatus() {
         return mStatus;
     }
-
     public Product getProduct() {
         return product;
     }
@@ -96,49 +95,49 @@ class Product {
     }
 
     @SerializedName("nova_group")
-    private int nova_group;
+    private double nova_group;
 
-    public int getNova_group() {
+    public double getNova_group() {
         return nova_group;
     }
 }
 
 class NutriLevels{
-     @SerializedName("saturated-fat")
-     private String saturated_fat;
-     @SerializedName("sugars")
-     private String sugars;
+    @SerializedName("saturated-fat")
+    private String saturated_fat;
+    @SerializedName("sugars")
+    private String sugars;
     @SerializedName("salt")
     private String salt;
     @SerializedName("fat")
     private String fat;
 
-     public String getFat() {
-         return fat;
-     }
+    public String getFat() {
+        return fat;
+    }
 
-     public String getSalt() {
-         return salt;
-     }
+    public String getSalt() {
+        return salt;
+    }
 
-     public String getSugars() {
-         return sugars;
-     }
+    public String getSugars() {
+        return sugars;
+    }
 
-     public String getSaturated_fat() {
-         return saturated_fat;
-     }
- }
+    public String getSaturated_fat() {
+        return saturated_fat;
+    }
+}
 
 class Nutri {
 
 
     @SerializedName("nutrition-score-fr_100g")
 
-    private int nutritionScoreFr100g;
+    private double nutritionScoreFr100g;
     @SerializedName("fat_serving")
 
-    private int fatServing;
+    private double fatServing;
     @SerializedName("iron_serving")
 
     private double ironServing;
@@ -147,13 +146,13 @@ class Nutri {
     private double saturatedFat;
     @SerializedName("calcium_value")
 
-    private int calciumValue;
+    private double calciumValue;
     @SerializedName("salt_serving")
 
     private double saltServing;
     @SerializedName("energy-kcal_value")
 
-    private int energyKcalValue;
+    private double energyKcalValue;
     @SerializedName("fiber_value")
 
     private double fiberValue;
@@ -171,13 +170,13 @@ class Nutri {
     private double fatValue;
     @SerializedName("sodium_value")
 
-    private int sodiumValue;
+    private double sodiumValue;
     @SerializedName("carbohydrates")
 
     private double carbohydrates;
     @SerializedName("trans-fat")
 
-    private int transFat;
+    private double transFat;
     @SerializedName("vitamin-a")
 
     private double vitaminA;
@@ -192,25 +191,25 @@ class Nutri {
     private double iron;
     @SerializedName("carbohydrates_serving")
 
-    private int carbohydratesServing;
+    private double carbohydratesServing;
     @SerializedName("vitamin-a_unit")
 
     private String vitaminAUnit;
     @SerializedName("proteins_serving")
 
-    private int proteinsServing;
+    private double proteinsServing;
     @SerializedName("saturated-fat_unit")
 
     private String saturatedFatUnit;
     @SerializedName("sugars_serving")
 
-    private int sugarsServing;
+    private double sugarsServing;
     @SerializedName("vitamin-a_serving")
 
     private double vitaminAServing;
     @SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g")
 
-    private int fruitsVegetablesNutsEstimateFromIngredients100g;
+    private double fruitsVegetablesNutsEstimateFromIngredients100g;
     @SerializedName("energy-kcal_unit")
 
     private String energyKcalUnit;
@@ -222,7 +221,7 @@ class Nutri {
     private double sugarsValue;
     @SerializedName("nova-group_100g")
 
-    private int novaGroup100g;
+    private double novaGroup100g;
     @SerializedName("sodium_unit")
 
     private String sodiumUnit;
@@ -231,10 +230,10 @@ class Nutri {
     private double carbohydrates100g;
     @SerializedName("cholesterol_serving")
 
-    private int cholesterolServing;
+    private double cholesterolServing;
     @SerializedName("vitamin-c_serving")
 
-    private int vitaminCServing;
+    private double vitaminCServing;
     @SerializedName("iron_unit")
 
     private String ironUnit;
@@ -243,10 +242,10 @@ class Nutri {
     private double proteinsValue;
     @SerializedName("nutrition-score-fr")
 
-    private int nutritionScoreFr;
+    private double nutritionScoreFr;
     @SerializedName("trans-fat_serving")
 
-    private int transFatServing;
+    private double transFatServing;
     @SerializedName("carbohydrates_unit")
 
     private String carbohydratesUnit;
@@ -258,22 +257,22 @@ class Nutri {
     private double iron100g;
     @SerializedName("trans-fat_100g")
 
-    private int transFat100g;
+    private double transFat100g;
     @SerializedName("sugars")
 
     private double sugars;
     @SerializedName("salt_value")
 
-    private int saltValue;
+    private double saltValue;
     @SerializedName("proteins")
 
     private double proteins;
     @SerializedName("energy-kcal_serving")
 
-    private int energyKcalServing;
+    private double energyKcalServing;
     @SerializedName("nova-group")
 
-    private int novaGroup;
+    private double novaGroup;
     @SerializedName("vitamin-a_100g")
 
     private double vitaminA100g;
@@ -288,28 +287,28 @@ class Nutri {
     private double saturatedFatValue;
     @SerializedName("cholesterol_value")
 
-    private int cholesterolValue;
+    private double cholesterolValue;
     @SerializedName("carbohydrates_value")
 
     private double carbohydratesValue;
     @SerializedName("energy-kcal")
 
-    private int energyKcal;
+    private double energyKcal;
     @SerializedName("fiber_serving")
 
     private double fiberServing;
     @SerializedName("energy_value")
 
-    private int energyValue;
+    private double energyValue;
     @SerializedName("salt_100g")
 
     private double salt100g;
     @SerializedName("nova-group_serving")
 
-    private int novaGroupServing;
+    private double novaGroupServing;
     @SerializedName("vitamin-c")
 
-    private int vitaminC;
+    private double vitaminC;
     @SerializedName("cholesterol_unit")
 
     private String cholesterolUnit;
@@ -318,10 +317,10 @@ class Nutri {
     private double calcium100g;
     @SerializedName("energy")
 
-    private int energy;
+    private double energy;
     @SerializedName("cholesterol")
 
-    private int cholesterol;
+    private double cholesterol;
     @SerializedName("iron_value")
 
     private double ironValue;
@@ -333,19 +332,19 @@ class Nutri {
     private double sugars100g;
     @SerializedName("energy_100g")
 
-    private int energy100g;
+    private double energy100g;
     @SerializedName("energy_serving")
 
-    private int energyServing;
+    private double energyServing;
     @SerializedName("vitamin-a_value")
 
-    private int vitaminAValue;
+    private double vitaminAValue;
     @SerializedName("saturated-fat_serving")
 
     private double saturatedFatServing;
     @SerializedName("vitamin-c_value")
 
-    private int vitaminCValue;
+    private double vitaminCValue;
     @SerializedName("fat")
 
     private double fat;
@@ -366,16 +365,16 @@ class Nutri {
     private double saturatedFat100g;
     @SerializedName("energy-kcal_100g")
 
-    private int energyKcal100g;
+    private double energyKcal100g;
     @SerializedName("trans-fat_value")
 
-    private int transFatValue;
+    private double transFatValue;
     @SerializedName("sodium_serving")
 
     private double sodiumServing;
     @SerializedName("nutrition-score-fr_serving")
 
-    private int nutritionScoreFrServing;
+    private double nutritionScoreFrServing;
     @SerializedName("sodium")
 
     private double sodium;
@@ -384,7 +383,7 @@ class Nutri {
     private String energyUnit;
     @SerializedName("cholesterol_100g")
 
-    private int cholesterol100g;
+    private double cholesterol100g;
     @SerializedName("sodium_100g")
 
     private double sodium100g;
@@ -393,13 +392,13 @@ class Nutri {
     private double proteins100g;
     @SerializedName("vitamin-c_100g")
 
-    private int vitaminC100g;
+    private double vitaminC100g;
 
-    public int getNutritionScoreFr100g() {
+    public double getNutritionScoreFr100g() {
         return nutritionScoreFr100g;
     }
 
-    public int getFatServing() {
+    public double getFatServing() {
         return fatServing;
     }
 
@@ -413,7 +412,7 @@ class Nutri {
     }
 
 
-    public int getCalciumValue() {
+    public double getCalciumValue() {
         return calciumValue;
     }
 
@@ -422,7 +421,7 @@ class Nutri {
         return saltServing;
     }
 
-    public int getEnergyKcalValue() {
+    public double getEnergyKcalValue() {
         return energyKcalValue;
     }
 
@@ -450,7 +449,7 @@ class Nutri {
         return fatValue;
     }
 
-    public int getSodiumValue() {
+    public double getSodiumValue() {
         return sodiumValue;
     }
 
@@ -459,7 +458,7 @@ class Nutri {
     }
 
 
-    public int getTransFat() {
+    public double getTransFat() {
         return transFat;
     }
 
@@ -483,7 +482,7 @@ class Nutri {
     }
 
 
-    public int getCarbohydratesServing() {
+    public double getCarbohydratesServing() {
         return carbohydratesServing;
     }
 
@@ -493,7 +492,7 @@ class Nutri {
     }
 
 
-    public int getProteinsServing() {
+    public double getProteinsServing() {
         return proteinsServing;
     }
 
@@ -501,7 +500,7 @@ class Nutri {
         return saturatedFatUnit;
     }
 
-    public int getSugarsServing() {
+    public double getSugarsServing() {
         return sugarsServing;
     }
 
@@ -509,7 +508,7 @@ class Nutri {
         return vitaminAServing;
     }
 
-    public int getFruitsVegetablesNutsEstimateFromIngredients100g() {
+    public double getFruitsVegetablesNutsEstimateFromIngredients100g() {
         return fruitsVegetablesNutsEstimateFromIngredients100g;
     }
 
@@ -525,7 +524,7 @@ class Nutri {
         return sugarsValue;
     }
 
-    public int getNovaGroup100g() {
+    public double getNovaGroup100g() {
         return novaGroup100g;
     }
 
@@ -538,11 +537,11 @@ class Nutri {
         return carbohydrates100g;
     }
 
-    public int getCholesterolServing() {
+    public double getCholesterolServing() {
         return cholesterolServing;
     }
 
-    public int getVitaminCServing() {
+    public double getVitaminCServing() {
         return vitaminCServing;
     }
 
@@ -555,12 +554,12 @@ class Nutri {
     }
 
 
-    public int getNutritionScoreFr() {
+    public double getNutritionScoreFr() {
         return nutritionScoreFr;
     }
 
 
-    public int getTransFatServing() {
+    public double getTransFatServing() {
         return transFatServing;
     }
 
@@ -579,7 +578,7 @@ class Nutri {
     }
 
 
-    public int getTransFat100g() {
+    public double getTransFat100g() {
         return transFat100g;
     }
 
@@ -589,7 +588,7 @@ class Nutri {
     }
 
 
-    public int getSaltValue() {
+    public double getSaltValue() {
         return saltValue;
     }
 
@@ -597,12 +596,12 @@ class Nutri {
         return proteins;
     }
 
-    public int getEnergyKcalServing() {
+    public double getEnergyKcalServing() {
         return energyKcalServing;
     }
 
 
-    public int getNovaGroup() {
+    public double getNovaGroup() {
         return novaGroup;
     }
 
@@ -624,7 +623,7 @@ class Nutri {
         return saturatedFatValue;
     }
 
-    public int getCholesterolValue() {
+    public double getCholesterolValue() {
         return cholesterolValue;
     }
 
@@ -633,7 +632,7 @@ class Nutri {
         return carbohydratesValue;
     }
 
-    public int getEnergyKcal() {
+    public double getEnergyKcal() {
         return energyKcal;
     }
 
@@ -642,7 +641,7 @@ class Nutri {
         return fiberServing;
     }
 
-    public int getEnergyValue() {
+    public double getEnergyValue() {
         return energyValue;
     }
 
@@ -651,12 +650,12 @@ class Nutri {
         return salt100g;
     }
 
-    public int getNovaGroupServing() {
+    public double getNovaGroupServing() {
         return novaGroupServing;
     }
 
 
-    public int getVitaminC() {
+    public double getVitaminC() {
         return vitaminC;
     }
 
@@ -668,11 +667,11 @@ class Nutri {
         return calcium100g;
     }
 
-    public int getEnergy() {
+    public double getEnergy() {
         return energy;
     }
 
-    public int getCholesterol() {
+    public double getCholesterol() {
         return cholesterol;
     }
 
@@ -688,15 +687,15 @@ class Nutri {
         return sugars100g;
     }
 
-    public int getEnergy100g() {
+    public double getEnergy100g() {
         return energy100g;
     }
 
-    public int getEnergyServing() {
+    public double getEnergyServing() {
         return energyServing;
     }
 
-    public int getVitaminAValue() {
+    public double getVitaminAValue() {
         return vitaminAValue;
     }
 
@@ -705,7 +704,7 @@ class Nutri {
     }
 
 
-    public int getVitaminCValue() {
+    public double getVitaminCValue() {
         return vitaminCValue;
     }
 
@@ -736,11 +735,11 @@ class Nutri {
         return saturatedFat100g;
     }
 
-    public int getEnergyKcal100g() {
+    public double getEnergyKcal100g() {
         return energyKcal100g;
     }
 
-    public int getTransFatValue() {
+    public double getTransFatValue() {
         return transFatValue;
     }
 
@@ -750,7 +749,7 @@ class Nutri {
     }
 
 
-    public int getNutritionScoreFrServing() {
+    public double getNutritionScoreFrServing() {
         return nutritionScoreFrServing;
     }
 
@@ -764,7 +763,7 @@ class Nutri {
         return energyUnit;
     }
 
-    public int getCholesterol100g() {
+    public double getCholesterol100g() {
         return cholesterol100g;
     }
 
@@ -776,161 +775,162 @@ class Nutri {
         return proteins100g;
     }
 
-    public int getVitaminC100g() {
+    public double getVitaminC100g() {
         return vitaminC100g;
     }
 }
 
 class NutriScoreData {
-    @SerializedName("grade")
-    private int grade;
 
-    public int getGrade() {
+    @SerializedName("grade")
+    private String grade;
+
+    public String getGrade() {
         return grade;
     }
 
     //Al de nutri waardes
     @SerializedName("proteins_value")
-    private int proteins;
+    private double proteins;
     @SerializedName("fiber_value")
-    private int fiber;
+    private double fiber;
     @SerializedName("sugars_value")
-    private int sugars;
+    private double sugars;
     @SerializedName("saturated_fat_value")
-    private int saturated_fat;
+    private double saturated_fat;
     @SerializedName("saturated_fat_ratio_value")
-    private int saturated_fat_ratio_value;
+    private double saturated_fat_ratio_value;
     @SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_value")
-    private int fruits_vegetables_nuts_colza_walnut_olive_oils_value;
+    private double fruits_vegetables_nuts_colza_walnut_olive_oils_value;
     @SerializedName("energy_value")
-    private int energy_value;
+    private double energy_value;
     @SerializedName("sodium_value")
-    private int sodium_value;
+    private double sodium_value;
 
-    public int getSodium_value() {
+    public double getSodium_value() {
         return sodium_value;
     }
 
-    public int getEnergy_value() {
+    public double getEnergy_value() {
         return energy_value;
     }
 
-    public int getFruits_vegetables_nuts_colza_walnut_olive_oils_value() {
+    public double getFruits_vegetables_nuts_colza_walnut_olive_oils_value() {
         return fruits_vegetables_nuts_colza_walnut_olive_oils_value;
     }
 
-    public int getSaturated_fat_ratio_value() {
+    public double getSaturated_fat_ratio_value() {
         return saturated_fat_ratio_value;
     }
 
-    public int getSaturated_fat() {
+    public double getSaturated_fat() {
         return saturated_fat;
     }
 
-    public int getSugars() {
+    public double getSugars() {
         return sugars;
     }
 
-    public int getFiber() {
+    public double getFiber() {
         return fiber;
     }
 
-    public int getProteins() {
+    public double getProteins() {
         return proteins;
     }
 
     //Al de booleans
     @SerializedName("is_cheese")
-    private boolean is_cheese;
+    private int is_cheese;
     @SerializedName("is_beverage")
-    private boolean is_beverage;
+    private int is_beverage;
     @SerializedName("is_fat")
-    private boolean is_fat;
+    private int is_fat;
     @SerializedName("is_water")
-    private boolean is_water;
+    private String is_water;
 
-    public boolean isIs_water() {
+    public String isIs_water() {
         return is_water;
     }
 
-    public boolean isIs_fat() {
+    public int isIs_fat() {
         return is_fat;
     }
 
-    public boolean getIs_beverage() {
+    public int getIs_beverage() {
         return is_beverage;
     }
 
-    public boolean getIs_cheese() {
+    public int getIs_cheese() {
         return is_cheese;
     }
 
 
     //Al de punten
     @SerializedName("score")
-    private int score;
+    private double score;
     @SerializedName("saturated_fat_ratio_points")
-    private int saturated_fat_ratio_points;
+    private double saturated_fat_ratio_points;
     @SerializedName("positive_points")
-    private int positive_points;
+    private double positive_points;
     @SerializedName("sodium_points")
-    private int sodium_points;
+    private double sodium_points;
     @SerializedName("proteins_points")
-    private int proteins_points;
+    private double proteins_points;
     @SerializedName("fiber_points")
-    private int fiber_points;
+    private double fiber_points;
     @SerializedName("energy_points")
-    private int energy_points;
+    private double energy_points;
     @SerializedName("negative_points")
-    private int negative_points;
+    private double negative_points;
     @SerializedName("sugars_points")
-    private int sugars_points;
+    private double sugars_points;
     @SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_points")
-    private int fruits_vegetables_nuts_colza_walnut_olive_oils_points;
+    private double fruits_vegetables_nuts_colza_walnut_olive_oils_points;
     @SerializedName("saturated_fat_points")
-    private int saturated_fat_points;
+    private double saturated_fat_points;
 
-    public int getSaturated_fat_points() {
+    public double getSaturated_fat_points() {
         return saturated_fat_points;
     }
 
-    public int getFruits_vegetables_nuts_colza_walnut_olive_oils_points() {
+    public double getFruits_vegetables_nuts_colza_walnut_olive_oils_points() {
         return fruits_vegetables_nuts_colza_walnut_olive_oils_points;
     }
 
-    public int getSugars_points() {
+    public double getSugars_points() {
         return sugars_points;
     }
 
-    public int getNegative_points() {
+    public double getNegative_points() {
         return negative_points;
     }
 
-    public int getEnergy_points() {
+    public double getEnergy_points() {
         return energy_points;
     }
 
-    public int getFiber_points() {
+    public double getFiber_points() {
         return fiber_points;
     }
 
-    public int getProteins_points() {
+    public double getProteins_points() {
         return proteins_points;
     }
 
-    public int getSodium_points() {
+    public double getSodium_points() {
         return sodium_points;
     }
 
-    public int getPositive_points() {
+    public double getPositive_points() {
         return positive_points;
     }
 
-    public int getSaturated_fat_ratio_points() {
+    public double getSaturated_fat_ratio_points() {
         return saturated_fat_ratio_points;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 }

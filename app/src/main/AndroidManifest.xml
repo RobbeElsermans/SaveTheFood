@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/savethefood_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestFindBarcode"
+        <activity android:name=".getBarcodeInfo"
             android:label="@string/testFindBarcode"
             android:parentActivityName=".MainActivity">
             <meta-data
