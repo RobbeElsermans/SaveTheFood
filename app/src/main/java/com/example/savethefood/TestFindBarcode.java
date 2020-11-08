@@ -19,7 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TestFindBarcode extends AppCompatActivity {
 
-    private TextView nameProduct;
+    //private BarcodeInfo data;
+    private Intent recieveBarcode;
+    private TextView barcode;
+    private TextView nutriscore;
+    private TextView urlProduct;
 
     FoodAPI ApiBarcode;
 
@@ -42,7 +46,9 @@ public class TestFindBarcode extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
 
 
-        TextView barcode = findViewById(R.id.text_Barcode);
+        barcode = findViewById(R.id.textview_barcode);
+        nutriscore = findViewById(R.id.textview_nutriscores);
+        urlProduct = findViewById(R.id.textview_url);
 
 
         cameraScan = new Intent(this,Scanner.class);
@@ -72,14 +78,10 @@ public class TestFindBarcode extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     BarcodeInfo posten = response.body();
+                    String nutriments = null;
+                    nutriments += "sugar: "+ posten.getStatusVerbose();
+                    nutriscore.setText(nutriments);
 
-                    String message = "";
-                    message += "Barcode: " + posten.getBarCode() + "\n";
-                    message += "Naam: " + posten.getProduct().getName() + "\n";
-                    message += "Status: " + posten.getStatus() + "\n";
-
-                    nameProduct.append(message);
-                    url = posten.getProduct().getImage_url();
 
                 }
                 else
@@ -97,5 +99,8 @@ public class TestFindBarcode extends AppCompatActivity {
 
     public void Scan(View view) {
         startActivity(cameraScan);
+    }
+
+    public void searchRecipe(View view) {
     }
 }
