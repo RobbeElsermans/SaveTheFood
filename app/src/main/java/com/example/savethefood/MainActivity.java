@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,21 +16,21 @@ import androidx.core.app.ActivityCompat;
 public class MainActivity extends AppCompatActivity {
 
     private Intent cameraScan;
+    private Intent searchRecipe;
 
-    public static final int BARCODE_REQUEST_FIND = 10;
-    public static final int BARCODE_REQUEST_ADD = 11;
+    private EditText searchKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cameraScan = new Intent(this,Scanner.class);
+        searchRecipe = new Intent(this, getRecipeInfo.class);
+
+        searchKey = findViewById(R.id.search_bar_item);
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
-    }
-
-    public void favorite(View view) {
     }
 
     public void scan(View view)
@@ -36,10 +38,28 @@ public class MainActivity extends AppCompatActivity {
         startActivity(cameraScan);
     }
 
-
-    public void add(View view) {
-
+    public void searchRecipe(View view) {
+        if (!isEmpty(searchKey))
+        {
+            searchRecipe.putExtra(getRecipeInfo.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
+            startActivity(searchRecipe);
+        }
+        else{
+            Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    public void favorite(View view) {
+    }
+
+    //bron: https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
+    private boolean isEmpty(EditText etText) {
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
+    }
+
 
     /*
     @Override

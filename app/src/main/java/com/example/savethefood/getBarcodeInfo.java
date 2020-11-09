@@ -9,7 +9,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,14 +19,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TestFindBarcode extends AppCompatActivity {
+public class getBarcodeInfo extends AppCompatActivity {
 
     //private BarcodeInfo data;
     private Intent recieveBarcode;
+    private Intent searchKey;
+
     private TextView barcode;
     private TextView nutriscore;
     private TextView urlProduct;
     private TextView productName;
+    private EditText editTextProductName;
 
     FoodAPI ApiBarcode;
 
@@ -44,15 +49,14 @@ public class TestFindBarcode extends AppCompatActivity {
                 .build();
         ApiBarcode = retrofit.create(FoodAPI.class);
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
-
-
         barcode = findViewById(R.id.textview_barcode);
         nutriscore = findViewById(R.id.textview_nutriscores);
         urlProduct = findViewById(R.id.textview_url);
         productName = findViewById(R.id.textview_product_name);
+        editTextProductName = findViewById(R.id.editText_product_name);
 
         cameraScan = new Intent(this,Scanner.class);
+        searchKey  = new Intent(this, getRecipeInfo.class);
 
         recieveBarcode = getIntent();
 
@@ -86,8 +90,7 @@ public class TestFindBarcode extends AppCompatActivity {
                     urlProduct.setText(posten.getProduct().getImage_url_small());
                     productName.setText(posten.getProduct().getName());
                     nutriscore.setText(nutriments);
-
-
+                    editTextProductName.setText(posten.getProduct().getName());
                 }
                 else
                 {
@@ -107,5 +110,20 @@ public class TestFindBarcode extends AppCompatActivity {
     }
 
     public void searchRecipe(View view) {
+        if (!isEmpty(editTextProductName))
+        {
+            searchKey.putExtra(getRecipeInfo.EXTRA_Recieve_SearchKey, editTextProductName.getText().toString());
+            startActivity(searchKey);
+        }
+        else{
+            Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isEmpty(EditText etText) {
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
     }
 }

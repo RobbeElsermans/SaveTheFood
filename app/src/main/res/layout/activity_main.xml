@@ -28,15 +28,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <SearchView
-        android:id="@+id/search_bar"
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider" />
+        app:layout_constraintTop_toTopOf="@id/divider">
+
+        <EditText
+            android:id="@+id/search_bar_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            />
+        <Button
+            android:id="@+id/btn_search_recipe"
+            style="@style/btn_main_style"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:onClick="searchRecipe"
+            android:text="@string/btn_search" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btns_layout"
@@ -46,7 +65,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar">
+        app:layout_constraintTop_toBottomOf="@id/search_layout">
 
         <Button
             android:id="@+id/btn_scan"

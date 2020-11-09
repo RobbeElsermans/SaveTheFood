@@ -3,7 +3,7 @@
     package="com.example.savethefood">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +12,24 @@
         android:roundIcon="@mipmap/savethefood_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".getBarcodeInfo"
-            android:label="@string/testFindBarcode"
+        <activity
+            android:name=".getRecipeInfo"
+            android:label="Search Recipe"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.savethefood.MainActivity"/>
+
+        </activity>
+
+
+        <activity
+            android:name=".getBarcodeInfo"
+            android:label="@string/testFindBarcode"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.savethefood.MainActivity" />
         </activity>
         <activity android:name=".Scanner" />
         <activity android:name=".MainActivity">
