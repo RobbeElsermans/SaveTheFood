@@ -1,7 +1,10 @@
 package com.example.savethefood;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.LinkedList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,6 +28,11 @@ public class getRecipeInfo extends AppCompatActivity {
     private String app_key = "025c0351897d2cd9fa6ea959a263f93b";
     private String msearchKey;
 
+    private RecyclerView mRecyclerView;
+    private RecipeListAdapter mRecipesListAdapter;
+
+    private final LinkedList<Recipe> recipes  = new LinkedList<>();
+
     private Intent getSearchKey;
 
     EDAMAMAPI APIrecipe;
@@ -34,7 +44,8 @@ public class getRecipeInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_recipe_info);
 
-        mrecipe = findViewById(R.id.search_Results);
+        //Recycler aanmaken
+        mRecyclerView = findViewById(R.id.recyclerview);
 
         //Intent ontvangen van een andere activity
         getSearchKey = getIntent();
@@ -49,11 +60,11 @@ public class getRecipeInfo extends AppCompatActivity {
                     .build();
             APIrecipe = retrofit.create(EDAMAMAPI.class);
 
-            retrieveInfo();
+            retrieveInfo(this);
         }
         else
         {
-            mrecipe.setText("Invalid input");
+
         }
     }
 
@@ -64,8 +75,8 @@ public class getRecipeInfo extends AppCompatActivity {
         return true;
     }
 
-    public void retrieveInfo(){
-        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword;
+    public void retrieveInfo(getRecipeInfo getRecipeInfo){
+        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword+"&to=15";
         Call<RecipeInfo> call = APIrecipe.getPosts(url);
 
         call.enqueue(new Callback<RecipeInfo>() {
@@ -76,16 +87,14 @@ public class getRecipeInfo extends AppCompatActivity {
 
                     RecipeInfo recipeInfo = response.body();
 
-                    String message = "";
-
-                    message +=  recipeInfo.getMore() + "\n";
-
                     for (int i = 0; i < recipeInfo.getHits().size(); i++)
                     {
-                        message += recipeInfo.getHits().get(i).getRecept().getLabel().toString() + "\n";
+                        recipes.addLast(recipeInfo.getHits().get(i).getRecept());
                     }
 
-                    mrecipe.setText(message);
+                    mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes);
+                    mRecyclerView.setAdapter(mRecipesListAdapter);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getRecipeInfo));
                 }
                 else
                 {

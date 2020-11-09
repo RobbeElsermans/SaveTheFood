@@ -23,26 +23,35 @@
 
             <EditText
                 android:id="@+id/editText_product_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="8" />
+                android:layout_weight="2"
+                android:hint="@string/recipe_search_hint"
+                android:textColor="@color/colorPrimaryDark" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_search_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:onClick="searchRecipe"
-                android:text="Search Recipe" />
+                android:text="@string/btn_search"
+                app:icon="@drawable/icon_search"
+                app:iconGravity="textStart"
+                app:iconTint="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_scan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="Scan"
-            android:text="Scan" />
+            android:text="@string/btn_scan"
+            app:icon="@drawable/icon_scan"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorPrimaryDark"
+            />
     </LinearLayout>
 
     <TextView

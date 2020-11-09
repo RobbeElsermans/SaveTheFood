@@ -8,4 +8,5 @@
     <string name="testFindBarcode">Find Barcode</string>
     <string name="textV_name">NAME:</string>
     <string name="btn_search">search</string>
+    <string name="recipe_search_hint">Enter a product</string>
 </resources>

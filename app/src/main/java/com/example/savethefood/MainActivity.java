@@ -3,6 +3,7 @@ package com.example.savethefood;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import java.net.URI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         searchKey = findViewById(R.id.search_bar_item);
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
-        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA},PackageManager.PERMISSION_GRANTED);
     }
 
     public void scan(View view)
@@ -59,6 +61,41 @@ public class MainActivity extends AppCompatActivity {
             return false;
 
         return true;
+    }
+
+    public void goToSite(View view) {
+        switch (view.getId())
+        {
+            case R.id.imgview_edamam:
+                Toast.makeText(this, "url naar EDAMAN", Toast.LENGTH_SHORT).show();
+
+                String url = "https://www.edamam.com/";
+                Uri pagina = Uri.parse(url);
+                Intent send = new Intent(Intent.ACTION_VIEW, pagina);
+                if (send.resolveActivity(getPackageManager()) != null) {
+                    startActivity(send);
+                }
+                else
+                {
+                    Toast.makeText(this, "Geen geldige browser gevonden!", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+            case R.id.imgview_openFoodFacts:
+                Toast.makeText(this, "url naar openFoodfacts", Toast.LENGTH_SHORT).show();
+
+                String url1 = "https://be-en.openfoodfacts.org/";
+                Uri pagina1 = Uri.parse(url1);
+                Intent send1 = new Intent(Intent.ACTION_VIEW, pagina1);
+                if (send1.resolveActivity(getPackageManager()) != null) {
+                    startActivity(send1);
+                }
+                else
+                {
+                    Toast.makeText(this, "Geen geldige browser gevonden!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
 

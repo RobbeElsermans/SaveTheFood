@@ -3,41 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorSecondaryDark">
-
-
-    <Button
-        android:id="@+id/btn_flash"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:foreground="@drawable/icon_flash_off"
-        app:layout_constraintBottom_toTopOf="@+id/scanner_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="flash"/>
+    android:layout_height="match_parent">
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_marginTop="72dp"
         app:autoFocusButtonVisible="false"
-        app:flashButtonVisible="false"
+        app:flashButtonColor="@color/colorSecondary"
+        app:flashButtonVisible="true"
         app:frameAspectRatioHeight="1"
         app:frameAspectRatioWidth="2"
-        app:frameColor="@color/colorSecondary"
+        app:frameColor="@color/colorPrimary"
         app:frameCornersRadius="3dp"
         app:frameCornersSize="25dp"
         app:frameSize="0.85"
         app:frameThickness="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:maskColor="@color/colorSecondaryDark">
+        app:maskColor="#77000000">
 
 
     </com.budiyev.android.codescanner.CodeScannerView>

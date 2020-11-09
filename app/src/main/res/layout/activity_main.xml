@@ -42,19 +42,22 @@
 
         <EditText
             android:id="@+id/search_bar_item"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            />
-        <Button
-            android:id="@+id/btn_search_recipe"
-            style="@style/btn_main_style"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:hint="@string/recipe_search_hint"
+            android:textColor="@color/colorPrimaryDark"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search_recipe"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:onClick="searchRecipe"
-            android:text="@string/btn_search" />
+            android:text="@string/btn_search"
+            app:icon="@drawable/icon_search"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorPrimaryDark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,47 +70,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_layout">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_scan"
-            style="@style/btn_main_style"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
             android:onClick="scan"
-            android:text="@string/btn_scan" />
+            android:text="@string/btn_scan"
+            android:layout_weight="1"
+            app:icon="@drawable/icon_scan"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorPrimaryDark"
+            />
 
-        <Button
-            android:id="@+id/btn_favorite"
-            style="@style/btn_main_style"
-            android:onClick="favorite"
-            android:text="@string/btn_favoriet" />
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/btnDownloadPdf"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:icon="@drawable/favorit_icon"
+            android:text="@string/btn_favoriet"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorPrimaryDark"/>
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_marginTop="250dp"
+    <ImageView
+        android:id="@+id/imgview_edamam"
+        android:layout_width="143dp"
+        android:layout_height="99dp"
+        android:src="@mipmap/icon_edamam"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btns_layout">
+        android:onClick="goToSite"/>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="648dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/text_scrollview"
-                android:textSize="36sp" />
-
-        </LinearLayout>
-    </ScrollView>
+    <ImageView
+        android:id="@+id/imgview_openFoodFacts"
+        android:layout_width="143dp"
+        android:layout_height="99dp"
+        android:layout_marginBottom="4dp"
+        android:src="@mipmap/icon_openfoodfacts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="goToSite"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
