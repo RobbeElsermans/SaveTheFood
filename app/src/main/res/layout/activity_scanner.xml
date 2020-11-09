@@ -3,28 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondaryDark">
+
+
+    <Button
+        android:id="@+id/btn_flash"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:foreground="@drawable/icon_flash_off"
+        app:layout_constraintBottom_toTopOf="@+id/scanner_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="flash"/>
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
-        app:flashButtonVisible="true"
+
+        android:layout_marginTop="72dp"
+        app:autoFocusButtonVisible="false"
+        app:flashButtonVisible="false"
         app:frameAspectRatioHeight="1"
-        app:frameAspectRatioWidth="1"
-        app:frameColor="@android:color/white"
-        app:frameCornersRadius="0dp"
-        app:frameCornersSize="50dp"
-        app:frameSize="0.75"
-        app:frameThickness="2dp"
+        app:frameAspectRatioWidth="2"
+        app:frameColor="@color/colorSecondary"
+        app:frameCornersRadius="3dp"
+        app:frameCornersSize="25dp"
+        app:frameSize="0.85"
+        app:frameThickness="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:maskColor="#77000000"
-        android:onClick="newScan"/>
+        app:maskColor="@color/colorSecondaryDark">
+
+
+    </com.budiyev.android.codescanner.CodeScannerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
