@@ -1,4 +1,4 @@
-package com.example.savethefood;
+package com.example.savethefood.Recipe.Model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -47,39 +47,4 @@ public class RecipeInfo {
         return hits;
     }
 }
-class hit {
-    @SerializedName("recipe")
-    private Recipe recept;
-    public Recipe getRecept() {
-        return recept;
-    }
 
-    @SerializedName("bookmarked")
-    private boolean bookmarked;
-
-    public boolean getBookmarked() {
-        return bookmarked;
-    }
-
-    @SerializedName("bought")
-    private boolean bought;
-
-    public boolean getBought() {
-        return bought;
-    }
-}
-class Recipe {
-    @SerializedName("image")
-    private String uri;
-
-    public String getUri() {
-        return uri;
-    }
-
-    @SerializedName("label")
-    private String label;
-
-    public String getLabel() {
-        return label;
-    }
-}

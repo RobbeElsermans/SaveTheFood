@@ -1,8 +1,9 @@
-package com.example.savethefood;
+package com.example.savethefood.Recipe;
+
+import com.example.savethefood.Recipe.Model.RecipeInfo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface EDAMAMAPI {

@@ -1,14 +1,16 @@
-package com.example.savethefood;
+package com.example.savethefood.Recipe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SingleRecipeInfo extends AppCompatActivity {
+import com.example.savethefood.R;
+
+public class SingleRecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_recipe_info);
+        setContentView(R.layout.activity_single_recipe);
     }
 }

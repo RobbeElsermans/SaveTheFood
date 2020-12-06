@@ -1,20 +1,16 @@
 package com.example.savethefood;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import java.net.URI;
+import com.example.savethefood.Recipe.RecipeActivity;
+import com.example.savethefood.Scanner.ScannerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        cameraScan = new Intent(this,Scanner.class);
-        searchRecipe = new Intent(this, getRecipeInfo.class);
+        cameraScan = new Intent(this, ScannerActivity.class);
+        searchRecipe = new Intent(this, RecipeActivity.class);
 
         searchKey = findViewById(R.id.search_bar_item);
 
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public void searchRecipe(View view) {
         if (!isEmpty(searchKey))
         {
-            searchRecipe.putExtra(getRecipeInfo.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
+            searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
             startActivity(searchRecipe);
         }
         else{

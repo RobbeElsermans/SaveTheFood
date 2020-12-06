@@ -1,4 +1,4 @@
-package com.example.savethefood;
+package com.example.savethefood.Food;
 
 import android.util.Log;
 
@@ -8,13 +8,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class APIBarcode {
+public class APIFood {
     private FoodAPI ApiBarcode;
     private Retrofit retrofit;
     private String barcode;
     private BarcodeInfo request;
 
-    public APIBarcode(String baseUrl,String barcode)
+    public APIFood(String baseUrl, String barcode)
     {
         retrofit = new Retrofit.Builder()
                 .baseUrl("baseUrl")

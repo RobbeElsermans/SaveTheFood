@@ -1,7 +1,6 @@
-package com.example.savethefood;
+package com.example.savethefood.Recipe;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.savethefood.R;
+import com.example.savethefood.Recipe.Model.Recipe;
 
-import java.lang.reflect.Constructor;
 import java.util.LinkedList;
-import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 

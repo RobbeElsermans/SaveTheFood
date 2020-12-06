@@ -1,10 +1,8 @@
-package com.example.savethefood;
+package com.example.savethefood.Food;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.PictureDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +20,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.load.model.StreamEncoder;
-import com.bumptech.glide.module.AppGlideModule;
-
-import java.io.InputStream;
+import com.example.savethefood.R;
+import com.example.savethefood.Scanner.Scanner;
+import com.example.savethefood.getRecipeInfo;
 
 
 public class getBarcodeInfo extends AppCompatActivity {
@@ -80,7 +76,7 @@ public class getBarcodeInfo extends AppCompatActivity {
         editTextProductName = findViewById(R.id.editText_product_name);
         nutriGrade = findViewById(R.id.imageView_nutri_grade);
 
-        cameraScan = new Intent(this,Scanner.class);
+        cameraScan = new Intent(this, Scanner.class);
         searchKey  = new Intent(this, getRecipeInfo.class);
 
         recieveBarcode = getIntent();

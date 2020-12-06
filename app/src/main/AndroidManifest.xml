@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/savethefood_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SingleRecipeInfo"></activity>
+        <activity android:name=".Recipe.SingleRecipeActivity"></activity>
         <activity
-            android:name=".getRecipeInfo"
+            android:name=".Recipe.RecipeActivity"
             android:label="Search Recipe"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -26,7 +26,7 @@
                 android:value="com.example.savethefood.MainActivity" />
         </activity>
         <activity
-            android:name=".getBarcodeInfo"
+            android:name=".Food.FoodActivity"
             android:label="@string/testFindBarcode"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -35,7 +35,7 @@
                 android:value="com.example.savethefood.MainActivity" />
         </activity>
         <activity
-            android:name=".Scanner"
+            android:name=".Scanner.ScannerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
