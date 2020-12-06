@@ -35,7 +35,7 @@ public class getRecipeInfo extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mRecipesListAdapter;
 
-    private LinkedList<Recipe> recipes;
+    private LinkedList<Recipe> recipes = new LinkedList<>();
     private Intent getSearchKey;
 
     EDAMAMAPI APIrecipe;
@@ -79,7 +79,7 @@ public class getRecipeInfo extends AppCompatActivity {
     }
 
     public void retrieveInfo(getRecipeInfo getRecipeInfo){
-        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword+"&to=15";
+        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword+"&to=2";
         Call<RecipeInfo> call = APIrecipe.getPosts(url);
 
         call.enqueue(new Callback<RecipeInfo>() {

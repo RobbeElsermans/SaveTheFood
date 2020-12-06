@@ -3,18 +3,31 @@ package com.example.savethefood;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.model.StreamEncoder;
+import com.bumptech.glide.module.AppGlideModule;
+
+import java.io.InputStream;
+
 
 public class getBarcodeInfo extends AppCompatActivity {
 
@@ -24,9 +37,11 @@ public class getBarcodeInfo extends AppCompatActivity {
 
     private TextView barcode;
     private TextView nutriscore;
-    private TextView urlProduct;
+    private ImageView urlProduct;
+    private ImageView nutriGrade;
     private TextView productName;
     private EditText editTextProductName;
+    private RequestBuilder requestBuilder;
 
     FoodAPI ApiBarcode;
 
@@ -45,12 +60,25 @@ public class getBarcodeInfo extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiBarcode = retrofit.create(FoodAPI.class);
-
+/*
+        requestBuilder = Glide.with(this)
+                .from(Uri.class)
+                .as(SVG.class)
+                .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
+                .sourceEncoder(new StreamEncoder())
+                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
+                .decoder(new SvgDecoder())
+                .placeholder(R.drawable.ic_facebook)
+                .error(R.drawable.ic_web)
+                .animate(android.R.anim.fade_in)
+                .listener(new SvgSoftwareLayerSetter<Uri>());
+*/
         barcode = findViewById(R.id.textview_barcode);
         nutriscore = findViewById(R.id.textview_nutriscores);
-        urlProduct = findViewById(R.id.textview_url);
+        urlProduct = findViewById(R.id.imageView_picture_food);
         productName = findViewById(R.id.textview_product_name);
         editTextProductName = findViewById(R.id.editText_product_name);
+        nutriGrade = findViewById(R.id.imageView_nutri_grade);
 
         cameraScan = new Intent(this,Scanner.class);
         searchKey  = new Intent(this, getRecipeInfo.class);
@@ -84,7 +112,10 @@ public class getBarcodeInfo extends AppCompatActivity {
                     nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
                     nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
 
-                    urlProduct.setText(posten.getProduct().getImage_url_small());
+                    Glide.with(getBarcodeInfo.this).load(posten.getProduct().getImage_url()).into(urlProduct);
+                    //Glide.tearDown();
+                    String nutriGradePicture = "https://static.openfoodfacts.org/images/misc/nutriscore-" + posten.getProduct().getNutriscore_grade() + ".svg";
+                    Glide.with(getBarcodeInfo.this).load(nutriGradePicture).into(nutriGrade);
                     productName.setText(posten.getProduct().getName());
                     nutriscore.setText(nutriments);
                     editTextProductName.setText(posten.getProduct().getName());
