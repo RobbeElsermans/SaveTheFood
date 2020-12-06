@@ -1,10 +1,12 @@
 package com.example.savethefood.Recipe;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public RecipeListAdapter.RecipeListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.recipe_item, parent, false);
-        return new RecipeListHolder(mItemView, this);
+
+        final RecipeListAdapter.RecipeListHolder viewHolder = new RecipeListAdapter.RecipeListHolder(mItemView);
+        viewHolder.item_container.setOnClickListener(new View.OnClickListener() {
+                                                         @Override
+                                                         public void onClick(View v) {
+                                                             Log.e("TEST", mRecipeList.get(viewHolder.getAdapterPosition()).getLabel());
+                                                         }
+                                                     }
+        );
+        return viewHolder;
     }
 
     //Het plaatsen van data
@@ -52,14 +63,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     class RecipeListHolder extends RecyclerView.ViewHolder {
         public final ImageView recipeUrl;
         public final TextView recipeTitle;
+        public final LinearLayout item_container;
 
-        final RecipeListAdapter mAdapter;
+        //final RecipeListAdapter mAdapter;
 
-        public RecipeListHolder(@NonNull View itemView, RecipeListAdapter adapter) {
+        public RecipeListHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.textview_recipe_title);
             recipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
-            this.mAdapter = adapter;
+            item_container = itemView.findViewById(R.id.lineairLayout_recipes);
+            //this.mAdapter = adapter;
         }
     }
 
