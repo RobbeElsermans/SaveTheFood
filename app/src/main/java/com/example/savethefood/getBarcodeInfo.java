@@ -76,7 +76,7 @@ public class getBarcodeInfo extends AppCompatActivity {
         call.enqueue(new Callback<BarcodeInfo>() {
             @Override
             public void onResponse(Call<BarcodeInfo> call, Response<BarcodeInfo> response) {
-                if (response.isSuccessful())
+                if (response.body().getProduct() != null)
                 {
                     BarcodeInfo posten = response.body();
                     String nutriments = "";
@@ -92,12 +92,17 @@ public class getBarcodeInfo extends AppCompatActivity {
                 else
                 {
                     Log.d("MainFail","Niet Succesfull" +response.code());
+                    Toast.makeText(getBarcodeInfo.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getBarcodeInfo.this,Scanner.class));
+                    finish();
                 }
             }
 
             @Override
             public void onFailure(Call<BarcodeInfo> call, Throwable t) {
                 Log.d("MainFail","Niet gelukt" + t.getMessage());
+                Toast.makeText(getBarcodeInfo.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

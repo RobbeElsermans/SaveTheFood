@@ -1,25 +1,35 @@
 package com.example.savethefood;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.lang.reflect.Constructor;
 import java.util.LinkedList;
+import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 
-    private final LinkedList<Recipe> mRecipeList;
+    private final List<Recipe> mRecipeList;
     private LayoutInflater mInflater;
+    private Context context;
 
-    public RecipeListAdapter(Context context, LinkedList<Recipe> recipeList) {
+    public RecipeListAdapter(Context context, List<Recipe> recipeList) {
         mInflater = LayoutInflater.from(context);
         this.mRecipeList = recipeList;
+        this.context = context;
     }
+
+
     @NonNull
     @Override
     public RecipeListAdapter.RecipeListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,7 +42,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(@NonNull RecipeListAdapter.RecipeListHolder holder, int position) {
         Recipe mCurrent = mRecipeList.get(position);
         holder.recipeTitle.setText(mCurrent.getLabel());
-        holder.recipeUrl.setText(mCurrent.getUri());
+        Glide.with(context).load(mCurrent.getUri()).into(holder.recipeUrl);
     }
 
     @Override
@@ -41,7 +51,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     class RecipeListHolder extends RecyclerView.ViewHolder {
-        public final TextView recipeUrl;
+        public final ImageView recipeUrl;
         public final TextView recipeTitle;
 
         final RecipeListAdapter mAdapter;
@@ -49,8 +59,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public RecipeListHolder(@NonNull View itemView, RecipeListAdapter adapter) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.textview_recipe_title);
-            recipeUrl = itemView.findViewById(R.id.textview_recipe_url);
+            recipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
             this.mAdapter = adapter;
         }
     }
+
 }

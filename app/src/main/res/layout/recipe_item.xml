@@ -14,12 +14,10 @@
         android:textSize="24dp"
         android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/textview_recipe_url"
+    <ImageView
+        android:id="@+id/imageView_recipe_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textStyle="italic"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

@@ -13,7 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+
 import java.util.LinkedList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,12 +35,11 @@ public class getRecipeInfo extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mRecipesListAdapter;
 
-    private final LinkedList<Recipe> recipes  = new LinkedList<>();
-
+    private List<Recipe> recipes;
     private Intent getSearchKey;
 
     EDAMAMAPI APIrecipe;
-    TextView mrecipe;
+    TextView mPretext;
     String mkeyword;
 
     @Override
@@ -46,7 +49,7 @@ public class getRecipeInfo extends AppCompatActivity {
 
         //Recycler aanmaken
         mRecyclerView = findViewById(R.id.recyclerview);
-
+        mPretext = findViewById(R.id.textView_PreText);
         //Intent ontvangen van een andere activity
         getSearchKey = getIntent();
 
@@ -82,14 +85,14 @@ public class getRecipeInfo extends AppCompatActivity {
         call.enqueue(new Callback<RecipeInfo>() {
             @Override
             public void onResponse(Call<RecipeInfo> call, Response<RecipeInfo> response) {
-                if (response.isSuccessful())
+                if (response.body().getCount() > 0)
                 {
-
+                    mPretext.setVisibility(View.GONE);
                     RecipeInfo recipeInfo = response.body();
 
                     for (int i = 0; i < recipeInfo.getHits().size(); i++)
                     {
-                        recipes.addLast(recipeInfo.getHits().get(i).getRecept());
+                        recipes.add(recipeInfo.getHits().get(i).getRecept());
                     }
 
                     mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes);
@@ -99,6 +102,8 @@ public class getRecipeInfo extends AppCompatActivity {
                 else
                 {
                     Log.d("MainFail","Niet Succesfull" +response.code());
+                    Toast.makeText(getRecipeInfo.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
