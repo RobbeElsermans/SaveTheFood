@@ -19,11 +19,11 @@ import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 
-    private final List<Recipe> mRecipeList;
+    private LinkedList<Recipe> mRecipeList = new LinkedList<Recipe>();
     private LayoutInflater mInflater;
     private Context context;
 
-    public RecipeListAdapter(Context context, List<Recipe> recipeList) {
+    public RecipeListAdapter(Context context, LinkedList<Recipe> recipeList) {
         mInflater = LayoutInflater.from(context);
         this.mRecipeList = recipeList;
         this.context = context;

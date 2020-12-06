@@ -35,7 +35,7 @@ public class getRecipeInfo extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mRecipesListAdapter;
 
-    private List<Recipe> recipes;
+    private LinkedList<Recipe> recipes;
     private Intent getSearchKey;
 
     EDAMAMAPI APIrecipe;
@@ -92,7 +92,7 @@ public class getRecipeInfo extends AppCompatActivity {
 
                     for (int i = 0; i < recipeInfo.getHits().size(); i++)
                     {
-                        recipes.add(recipeInfo.getHits().get(i).getRecept());
+                        recipes.addLast(recipeInfo.getHits().get(i).getRecept());
                     }
 
                     mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes);
