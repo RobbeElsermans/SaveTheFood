@@ -20,12 +20,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.bumptech.glide.RequestBuilder;
+import com.example.savethefood.Food.Model.FoodInfo;
 import com.example.savethefood.R;
-import com.example.savethefood.Scanner.Scanner;
-import com.example.savethefood.getRecipeInfo;
+import com.example.savethefood.Scanner.ScannerActivity;
+import com.example.savethefood.Recipe.RecipeActivity;
 
 
-public class getBarcodeInfo extends AppCompatActivity {
+public class FoodActivity extends AppCompatActivity {
 
     //private BarcodeInfo data;
     private Intent recieveBarcode;
@@ -48,7 +49,7 @@ public class getBarcodeInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_barcode_info);
+        setContentView(R.layout.activity_food);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -76,12 +77,12 @@ public class getBarcodeInfo extends AppCompatActivity {
         editTextProductName = findViewById(R.id.editText_product_name);
         nutriGrade = findViewById(R.id.imageView_nutri_grade);
 
-        cameraScan = new Intent(this, Scanner.class);
-        searchKey  = new Intent(this, getRecipeInfo.class);
+        cameraScan = new Intent(this, ScannerActivity.class);
+        searchKey  = new Intent(this, RecipeActivity.class);
 
         recieveBarcode = getIntent();
 
-        barcodeText = recieveBarcode.getStringExtra(Scanner.EXTRA_RETURN_BARCODE);
+        barcodeText = recieveBarcode.getStringExtra(ScannerActivity.EXTRA_RETURN_BARCODE);
 
         barcode.setText("barcode: " + barcodeText);
 
@@ -95,23 +96,23 @@ public class getBarcodeInfo extends AppCompatActivity {
     }
 
     public void retrieveInfo(){
-        Call<BarcodeInfo> call = ApiBarcode.getPosts(barcodeText.toString());
+        Call<FoodInfo> call = ApiBarcode.getPosts(barcodeText.toString());
 
-        call.enqueue(new Callback<BarcodeInfo>() {
+        call.enqueue(new Callback<FoodInfo>() {
             @Override
-            public void onResponse(Call<BarcodeInfo> call, Response<BarcodeInfo> response) {
+            public void onResponse(Call<FoodInfo> call, Response<FoodInfo> response) {
                 if (response.body().getProduct() != null)
                 {
-                    BarcodeInfo posten = response.body();
+                    FoodInfo posten = response.body();
                     String nutriments = "";
                     nutriments += "energy: " + posten.getProduct().getNutriscore_data().getEnergy_value() + "kcal\n";
                     nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
                     nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
 
-                    Glide.with(getBarcodeInfo.this).load(posten.getProduct().getImage_url()).into(urlProduct);
+                    Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
                     //Glide.tearDown();
                     String nutriGradePicture = "https://static.openfoodfacts.org/images/misc/nutriscore-" + posten.getProduct().getNutriscore_grade() + ".svg";
-                    Glide.with(getBarcodeInfo.this).load(nutriGradePicture).into(nutriGrade);
+                    Glide.with(FoodActivity.this).load(nutriGradePicture).into(nutriGrade);
                     productName.setText(posten.getProduct().getName());
                     nutriscore.setText(nutriments);
                     editTextProductName.setText(posten.getProduct().getName());
@@ -119,16 +120,16 @@ public class getBarcodeInfo extends AppCompatActivity {
                 else
                 {
                     Log.d("MainFail","Niet Succesfull" +response.code());
-                    Toast.makeText(getBarcodeInfo.this, "not found in database!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getBarcodeInfo.this,Scanner.class));
+                    Toast.makeText(FoodActivity.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(FoodActivity.this, ScannerActivity.class));
                     finish();
                 }
             }
 
             @Override
-            public void onFailure(Call<BarcodeInfo> call, Throwable t) {
+            public void onFailure(Call<FoodInfo> call, Throwable t) {
                 Log.d("MainFail","Niet gelukt" + t.getMessage());
-                Toast.makeText(getBarcodeInfo.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodActivity.this, "not found in database!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -141,7 +142,7 @@ public class getBarcodeInfo extends AppCompatActivity {
     public void searchRecipe(View view) {
         if (!isEmpty(editTextProductName))
         {
-            searchKey.putExtra(getRecipeInfo.EXTRA_Recieve_SearchKey, editTextProductName.getText().toString());
+            searchKey.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, editTextProductName.getText().toString());
             startActivity(searchKey);
         }
         else{
