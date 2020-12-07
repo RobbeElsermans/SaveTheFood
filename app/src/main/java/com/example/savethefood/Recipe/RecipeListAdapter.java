@@ -20,29 +20,26 @@ import java.util.LinkedList;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 
-    private LinkedList<Recipe> mRecipeList = new LinkedList<Recipe>();
+    private LinkedList<Recipe> mRecipeList;
     private LayoutInflater mInflater;
     private Context context;
+    private OnNodeListener mOnNodeListener;
 
-    public RecipeListAdapter(Context context, LinkedList<Recipe> recipeList) {
+    public RecipeListAdapter(Context context, LinkedList<Recipe> recipeList, OnNodeListener onNodeListener) {
         mInflater = LayoutInflater.from(context);
         this.mRecipeList = recipeList;
         this.context = context;
+        this.mOnNodeListener = onNodeListener;
     }
-
 
     @NonNull
     @Override
     public RecipeListAdapter.RecipeListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.recipe_item, parent, false);
 
-        final RecipeListAdapter.RecipeListHolder viewHolder = new RecipeListAdapter.RecipeListHolder(mItemView);
-        viewHolder.item_container.setOnClickListener(v -> Log.e("TEST", mRecipeList.get(viewHolder.getAdapterPosition()).getLabel())
-        );
-        return viewHolder;
+        return new RecipeListHolder(mItemView, mOnNodeListener);
     }
 
-    //Het plaatsen van data
     @Override
     public void onBindViewHolder(@NonNull RecipeListAdapter.RecipeListHolder holder, int position) {
         Recipe mCurrent = mRecipeList.get(position);
@@ -55,17 +52,26 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return mRecipeList.size();
     }
 
-    class RecipeListHolder extends RecyclerView.ViewHolder {
+    class RecipeListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final ImageView recipeUrl;
         public final TextView recipeTitle;
-        public final LinearLayout item_container;
+        OnNodeListener onNodeListener;
 
-        public RecipeListHolder(@NonNull View itemView) {
+        public RecipeListHolder(@NonNull View itemView, OnNodeListener onNodeListener) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.textview_recipe_title);
             recipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
-            item_container = itemView.findViewById(R.id.lineairLayout_recipes);
+            this.onNodeListener =   onNodeListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onNodeListener.onNodeClick(getAdapterPosition());
         }
     }
 
+    public interface OnNodeListener{
+        void onNodeClick(int position);
+    }
 }

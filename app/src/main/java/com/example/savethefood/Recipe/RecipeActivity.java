@@ -23,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeListAdapter.OnNodeListener {
 
     public final static String EXTRA_Recieve_SearchKey = "com.example.Scanner.ReceiveSearchKey";
     private String app_ID = "c4d00532";
@@ -93,7 +93,7 @@ public class RecipeActivity extends AppCompatActivity {
                         recipes.addLast(recipeInfo.getHits().get(i).getRecept());
                     }
 
-                    mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes);
+                    mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes, RecipeActivity.this::onNodeClick);
                     mRecyclerView.setAdapter(mRecipesListAdapter);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getRecipeInfo));
                 }
@@ -110,5 +110,11 @@ public class RecipeActivity extends AppCompatActivity {
                 Log.d("MainFail","Niet gelukt" + t.getMessage());
             }
         });
+    }
+
+
+    @Override
+    public void onNodeClick(int position) {
+        Log.e(this.toString(), recipes.get(position).getLabel());
     }
 }
