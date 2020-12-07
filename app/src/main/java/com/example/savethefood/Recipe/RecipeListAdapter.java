@@ -37,12 +37,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         View mItemView = mInflater.inflate(R.layout.recipe_item, parent, false);
 
         final RecipeListAdapter.RecipeListHolder viewHolder = new RecipeListAdapter.RecipeListHolder(mItemView);
-        viewHolder.item_container.setOnClickListener(new View.OnClickListener() {
-                                                         @Override
-                                                         public void onClick(View v) {
-                                                             Log.e("TEST", mRecipeList.get(viewHolder.getAdapterPosition()).getLabel());
-                                                         }
-                                                     }
+        viewHolder.item_container.setOnClickListener(v -> Log.e("TEST", mRecipeList.get(viewHolder.getAdapterPosition()).getLabel())
         );
         return viewHolder;
     }
@@ -65,14 +60,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public final TextView recipeTitle;
         public final LinearLayout item_container;
 
-        //final RecipeListAdapter mAdapter;
-
         public RecipeListHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.textview_recipe_title);
             recipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
             item_container = itemView.findViewById(R.id.lineairLayout_recipes);
-            //this.mAdapter = adapter;
         }
     }
 
