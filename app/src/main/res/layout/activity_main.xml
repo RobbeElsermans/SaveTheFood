@@ -90,7 +90,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            app:icon="@drawable/favorit_icon"
+            app:icon="@drawable/icon_favorite"
             android:text="@string/btn_favoriet"
             app:iconGravity="textStart"
             app:iconTint="@color/colorPrimaryDark"/>

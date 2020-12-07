@@ -1,8 +1,12 @@
 package com.example.savethefood;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+
+        if (!NetworkCheck.getInstance(this).isOnline())
+        {
+            Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void scan(View view)
@@ -63,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.imgview_edamam:
-                Toast.makeText(this, "url naar EDAMAN", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "url naar EDAMAN", Toast.LENGTH_SHORT).show();
 
                 String url = "https://www.edamam.com/";
                 Uri pagina = Uri.parse(url);
@@ -73,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "Geen geldige browser gevonden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No valid browser found!", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             case R.id.imgview_openFoodFacts:
-                Toast.makeText(this, "url naar openFoodfacts", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "url naar openFoodfacts", Toast.LENGTH_SHORT).show();
 
                 String url1 = "https://be-en.openfoodfacts.org/";
                 Uri pagina1 = Uri.parse(url1);
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "Geen geldige browser gevonden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No valid browser found!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -125,4 +134,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     */
+    public boolean isNetworkAvailable() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
 }

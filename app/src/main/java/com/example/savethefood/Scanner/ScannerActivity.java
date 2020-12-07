@@ -2,6 +2,7 @@ package com.example.savethefood.Scanner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.savethefood.Food.FoodActivity;
+import com.example.savethefood.NetworkCheck;
 import com.example.savethefood.R;
 import com.google.zxing.Result;
 
@@ -32,6 +34,12 @@ public class ScannerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!NetworkCheck.getInstance(this).isOnline())
+        {
+            Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
+            finish();
+        }
 
         Intent ReceiveIntent = getIntent();
 

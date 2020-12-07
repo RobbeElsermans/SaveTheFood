@@ -1,12 +1,10 @@
 package com.example.savethefood.Recipe;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,7 +42,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(@NonNull RecipeListAdapter.RecipeListHolder holder, int position) {
         Recipe mCurrent = mRecipeList.get(position);
         holder.recipeTitle.setText(mCurrent.getLabel());
-        Glide.with(context).load(mCurrent.getUri()).into(holder.recipeUrl);
+        Glide.with(context).load(mCurrent.getImage()).into(holder.recipeUrl);
     }
 
     @Override
