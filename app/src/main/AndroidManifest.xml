@@ -2,23 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.savethefood">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    //BRON: https://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--"BRON: https://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android"-->
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/savethefood_icon"
         android:label="@string/app_label_name"
         android:roundIcon="@mipmap/savethefood_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Recipe.SingleRecipeActivity"></activity>
+
+        <activity android:name=".Recipe.SingleRecipeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity
             android:name=".Recipe.RecipeActivity"
             android:label="Search Recipe"
@@ -28,6 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.savethefood.MainActivity" />
         </activity>
+
         <activity
             android:name=".Food.FoodActivity"
             android:label="@string/testFindBarcode"
@@ -37,6 +45,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.savethefood.MainActivity" />
         </activity>
+
         <activity
             android:name=".Scanner.ScannerActivity"
             android:screenOrientation="portrait" />
@@ -49,6 +58,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

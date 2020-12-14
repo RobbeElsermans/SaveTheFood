@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.savethefood.R;
@@ -20,6 +25,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     private ImageView mRecipeImage;
     private TextView mSourceRecipe;
+    private Toolbar mToolbar;
 
     private Recipe mRecipe;
 
@@ -31,6 +37,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
         receiveIntent();
 
         Log.d(String.valueOf(this), mRecipe.getLabel());
+
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         createContent();
     }
@@ -50,7 +59,34 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mSourceRecipe.setText(mRecipe.getSource());
     }
 
-    public void goToWebsite(View view) {
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.action_go_to_website:
+                goToWebsite();
+                return true;
+
+            case R.id.action_favorite:
+                addToFavorites();
+                return true;
+
+            case R.id.action_share:
+                share();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_single_recipe, menu);
+        return true;
+    }
+
+    private void goToWebsite() {
         String url = mRecipe.getWebsiteUrl();
         Uri page = Uri.parse(url);
         Intent send = new Intent(Intent.ACTION_VIEW, page);
@@ -61,9 +97,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
         }
     }
 
-    public void addToFavorites(View view) {
+    public void addToFavorites() {
     }
 
-    public void share(View view) {
+    public void share() {
     }
 }
