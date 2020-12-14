@@ -11,6 +11,7 @@ public class Recipe implements Parcelable {
         label = in.readString();
         sharelink = in.readString();
         websiteUrl = in.readString();
+        source = in.readString();
         length = in.readInt();
         ingredients = new String[length];
         in.readStringArray(ingredients);
@@ -31,37 +32,39 @@ public class Recipe implements Parcelable {
     private int length;
     public int getLength(){return length;}
 
+    @SerializedName("source")
+    private String source;
+    public String getSource() {
+        return source;
+    }
+
+
     @SerializedName("image")
     private String Image;
-
     public String getImage() {
         return Image;
     }
 
     @SerializedName("label")
     private String label;
-
     public String getLabel() {
         return label;
     }
 
     @SerializedName("shareAs")
     private String sharelink;
-
     public String getSharelink() {
         return sharelink;
     }
 
     @SerializedName("url")
     private String websiteUrl;
-
     public String getWebsiteUrl() {
         return websiteUrl;
     }
 
     @SerializedName("ingredientLines")
     private String[] ingredients;
-
     public String[] getIngredients() {
         return ingredients;
     }
@@ -78,6 +81,7 @@ public class Recipe implements Parcelable {
         dest.writeString(label);
         dest.writeString(sharelink);
         dest.writeString(websiteUrl);
+        dest.writeString(source);
         //dest.writeStringArray(ingredients);
         length = ingredients.length;
         dest.writeInt(length);

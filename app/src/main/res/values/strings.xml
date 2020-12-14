@@ -10,4 +10,5 @@
     <string name="btn_search">search</string>
     <string name="recipe_search_hint">Enter a product</string>
     <string name="Initial_Text_Product_Name">retreiving data from Database</string>
+    <string name="source_of_recipe">Source of recipe</string>
 </resources>
