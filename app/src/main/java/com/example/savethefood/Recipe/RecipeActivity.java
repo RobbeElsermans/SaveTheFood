@@ -31,7 +31,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
     public final static String EXTRA_Recieve_SearchKey = "com.example.Scanner.ReceiveSearchKey";
     private String app_ID = "c4d00532";
     private String app_key = "025c0351897d2cd9fa6ea959a263f93b";
-    private String msearchKey;
 
     private int mTryReconnect = 2;
 

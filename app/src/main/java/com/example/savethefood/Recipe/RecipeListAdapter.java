@@ -40,9 +40,21 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull RecipeListAdapter.RecipeListHolder holder, int position) {
-        Recipe mCurrent = mRecipeList.get(position);
-        holder.recipeTitle.setText(mCurrent.getLabel());
-        Glide.with(context).load(mCurrent.getImage()).into(holder.recipeUrl);
+        Recipe mCurrentRecipe = mRecipeList.get(position);
+
+        holder.mRecipeTitle.setText(mCurrentRecipe.getLabel());
+
+        String text = "";
+        text += mCurrentRecipe.getIngredientLines().length + " Ingredients";
+        holder.mRecipeSubTitle.setText(text);
+
+        text = (int)mCurrentRecipe.getPrepTime() + " minutes";
+        holder.mRecipePreparationTime.setText(text);
+
+        text = (int)mCurrentRecipe.getCalories() + " kcal";
+        holder.mRecipeCalories.setText(text);
+
+        Glide.with(context).load(mCurrentRecipe.getImage()).into(holder.mRecipeUrl);
     }
 
     @Override
@@ -51,14 +63,20 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     class RecipeListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final ImageView recipeUrl;
-        public final TextView recipeTitle;
+        public final ImageView mRecipeUrl;
+        public final TextView mRecipeTitle;
+        public final TextView mRecipeSubTitle;
+        public final TextView mRecipePreparationTime;
+        public final TextView mRecipeCalories;
         OnNodeListener onNodeListener;
 
         public RecipeListHolder(@NonNull View itemView, OnNodeListener onNodeListener) {
             super(itemView);
-            recipeTitle = itemView.findViewById(R.id.textview_recipe_title);
-            recipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
+            mRecipeTitle = itemView.findViewById(R.id.textview_recipe_title);
+            mRecipeUrl = itemView.findViewById(R.id.imageView_recipe_image);
+            mRecipeSubTitle = itemView.findViewById(R.id.textview_recipe_description);
+            mRecipePreparationTime = itemView.findViewById(R.id.textview_recipe_preperation);
+            mRecipeCalories = itemView.findViewById(R.id.textview_recipe_calories);
             this.onNodeListener =   onNodeListener;
             itemView.setOnClickListener(this);
         }

@@ -20,12 +20,19 @@ import com.bumptech.glide.Glide;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
 
+import org.w3c.dom.Text;
+
 public class SingleRecipeActivity extends AppCompatActivity {
     public final static String EXTRA_Single_Recipe = "com.example.SingleRecipeActivity.SingleRecipe";
 
     private ImageView mRecipeImage;
     private TextView mSourceRecipe;
     private Toolbar mToolbar;
+
+    private TextView mIngredientTitle;
+    private TextView mIngredients;
+    private TextView mNutritionTitle;
+    private TextView mNutritions;
 
     private Recipe mRecipe;
 
@@ -54,9 +61,28 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         mRecipeImage = findViewById(R.id.imageView_recipe_image);
         mSourceRecipe = findViewById(R.id.textView_source_of_recipe);
+        mIngredients = findViewById(R.id.textView_ingredients);
+        mIngredientTitle = findViewById(R.id.textView_ingredients_title);
+        mNutritions = findViewById(R.id.textView_nutrition);
+        mNutritionTitle = findViewById(R.id.textView_nutrition_title);
 
         Glide.with(this).load(mRecipe.getImage()).into(mRecipeImage);
         mSourceRecipe.setText(mRecipe.getSource());
+
+        String text = "";
+        text += mRecipe.getIngredientLines().length + " Ingredients";
+        mIngredientTitle.setText(text);
+
+        text = "";
+        for (int x = 0; x < mRecipe.getIngredientLines().length; x++)
+        {
+            text += x+1 +") " +mRecipe.getIngredientLines()[x] + ",\n";
+        }
+        mIngredients.setText(text);
+
+        //getNutrients
+        text = "";
+
     }
 
     @Override
@@ -98,8 +124,14 @@ public class SingleRecipeActivity extends AppCompatActivity {
     }
 
     public void addToFavorites() {
+        //Sla de mRecipe op lokaal
     }
 
     public void share() {
+        //Geef de url van de pagina mee
+    }
+
+    public void goToSite(View view) {
+        goToWebsite();
     }
 }

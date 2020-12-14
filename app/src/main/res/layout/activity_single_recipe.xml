@@ -21,28 +21,29 @@
 
     <ImageView
         android:id="@+id/imageView_recipe_image"
-        android:layout_width="379dp"
-        android:layout_height="182dp"
-
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:onClick="goToSite"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/textView_source_of_recipe"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="28dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="source"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/imageView_recipe_image" />
 
     <TextView
@@ -51,13 +52,64 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="source of recipe:"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView_source_of_recipe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_recipe_image" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_source_of_recipe"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_ingredients_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="amount Ingredients"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ingredients"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textView_nutrition_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nutrition"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_nutrition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nutritions"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

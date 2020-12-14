@@ -12,9 +12,11 @@ public class Recipe implements Parcelable {
         sharelink = in.readString();
         websiteUrl = in.readString();
         source = in.readString();
+        prepTime = in.readDouble();
+        calories = in.readDouble();
         length = in.readInt();
-        ingredients = new String[length];
-        in.readStringArray(ingredients);
+        ingredientLines = new String[length];
+        in.readStringArray(ingredientLines);
     }
 
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
@@ -38,6 +40,17 @@ public class Recipe implements Parcelable {
         return source;
     }
 
+    @SerializedName("totalTime")
+    private double prepTime;
+    public double getPrepTime() {
+        return prepTime;
+    }
+
+    @SerializedName("calories")
+    private double calories;
+    public double getCalories() {
+        return calories;
+    }
 
     @SerializedName("image")
     private String Image;
@@ -64,11 +77,10 @@ public class Recipe implements Parcelable {
     }
 
     @SerializedName("ingredientLines")
-    private String[] ingredients;
-    public String[] getIngredients() {
-        return ingredients;
+    private String[] ingredientLines;
+    public String[] getIngredientLines() {
+        return ingredientLines;
     }
-
 
     @Override
     public int describeContents() {
@@ -82,14 +94,16 @@ public class Recipe implements Parcelable {
         dest.writeString(sharelink);
         dest.writeString(websiteUrl);
         dest.writeString(source);
+        dest.writeDouble(prepTime);
+        dest.writeDouble(calories);
         //dest.writeStringArray(ingredients);
-        length = ingredients.length;
+        length = ingredientLines.length;
         dest.writeInt(length);
         dest.writeInt(length);
 
-        for(int x = 0; x < ingredients.length; x++)
+        for(int x = 0; x < ingredientLines.length; x++)
         {
-            dest.writeString(ingredients[x]);
+            dest.writeString(ingredientLines[x]);
         }
     }
 }
