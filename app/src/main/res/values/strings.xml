@@ -12,4 +12,5 @@
     <string name="Initial_Text_Product_Name">retreiving data from Database</string>
     <string name="source_of_recipe">Source of recipe</string>
     <string name="camera_permission_text">This app needs access to your camera so you can take pictures of ingredients.</string>
+    <string name="internet_permission_text">This app needs access to your internet connection so it can search for recipes and ingredients in our database.</string>
 </resources>
