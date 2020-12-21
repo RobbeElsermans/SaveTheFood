@@ -21,9 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.bumptech.glide.RequestBuilder;
 import com.example.savethefood.Food.Model.FoodInfo;
+import com.example.savethefood.Food.Model.Nutri;
+import com.example.savethefood.Food.Model.NutriScoreData;
 import com.example.savethefood.R;
 import com.example.savethefood.Scanner.ScannerActivity;
 import com.example.savethefood.Recipe.RecipeActivity;
+
+import java.text.DecimalFormat;
 
 
 public class FoodActivity extends AppCompatActivity {
@@ -103,27 +107,40 @@ public class FoodActivity extends AppCompatActivity {
             public void onResponse(Call<FoodInfo> call, Response<FoodInfo> response) {
                 if (response.body().getProduct() != null)
                 {
+                    //Bron: https://stackoverflow.com/questions/9366280/android-round-to-2-decimal-places
+                    DecimalFormat format = new DecimalFormat("#.##");
+                    
                     FoodInfo posten = response.body();
                     String nutriments = "";
 
                     if (posten.getProduct().getNutriscore_data() != null)
                     {
-                        nutriments += "energy: " + posten.getProduct().getNutriscore_data().getEnergy_value() + "kcal\n";
-                        nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
-                        nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
-                        nutriments += "fiber: " + posten.getProduct().getNutriscore_data().getFiber() + "g\n";
-                        nutriments += "proteins: " + posten.getProduct().getNutriscore_data().getProteins() + "g\n";
-                        nutriments += "sodium: " + posten.getProduct().getNutriscore_data().getSodium_value() + "g\n";
-                        nutriments += "sugar: " + posten.getProduct().getNutriscore_data().getSugars() + "g\n";
+                        Nutri nutri = posten.getProduct().getNutriments();
+                        if(nutri.getEnergyValue() != 0) nutriments += "energy: " + format.format(nutri.getEnergyValue()) + nutri.getEnergyKcalUnit()+"\n";
+                        if(nutri.getSugarsValue() != 0) nutriments += "sugar: "+ format.format(nutri.getSugarsValue()) + nutri.getSugarsUnit() +"\n";
+                        if(nutri.getSaturatedFatValue() != 0) nutriments += "fat: " + format.format(nutri.getSaturatedFatValue()) +nutri.getSaturatedFatUnit()+ "\n";
+                        if(nutri.getFiberValue() != 0) nutriments += "fiber: " + format.format(nutri.getFiberValue()) +nutri.getFiberUnit()+ "\n";
+                        if(nutri.getProteinsValue() != 0) nutriments += "proteins: " + format.format(nutri.getProteinsValue()) + nutri.getProteinsUnit() +"\n";
+                        if(nutri.getSodiumValue() != 0) nutriments += "sodium: " + format.format(nutri.getSodiumValue()) + nutri.getSodiumUnit()+ "\n";
+                        if(nutri.getIronValue() != 0) nutriments += "iron: " + format.format(nutri.getIronValue()) + nutri.getIronUnit()+ "\n";
+                        if(nutri.getSaltValue() != 0) nutriments += "salt: " + format.format(nutri.getSaltValue()) + nutri.getSaltUnit()+ "\n";
+                        if(nutri.getCalciumValue() != 0) nutriments += "calcium: " + format.format(nutri.getCalciumValue()) + nutri.getCalciumUnit()+ "\n";
+                        if(nutri.getCarbohydratesValue() != 0) nutriments += "carbohydrate: " + format.format(nutri.getCarbohydratesValue()) + nutri.getCarbohydratesUnit()+ "\n";
+                        if(nutri.getCholesterolValue() != 0) nutriments += "cholesterol: " + format.format(nutri.getCholesterolValue()) + nutri.getCholesterolUnit()+ "\n";
+                    }
+                    else if(posten.getProduct().getNutriments() != null)
+                    {
+                        NutriScoreData nutriScoreData = posten.getProduct().getNutriscore_data();
+                        if(nutriScoreData.getEnergy_value() != 0) nutriments += "energy: " + format.format(nutriScoreData.getEnergy_value()) + "kcal\n";
+                        if(nutriScoreData.getSugars() != 0) nutriments += "sugar: "+ format.format(nutriScoreData.getSugars()) + "g\n";
+                        if(nutriScoreData.getSaturated_fat() != 0) nutriments += "fat: " + format.format(nutriScoreData.getSaturated_fat()) + "g\n";
+                        if(nutriScoreData.getFiber() != 0) nutriments += "fiber: " + format.format(nutriScoreData.getFiber()) + "g\n";
+                        if(nutriScoreData.getProteins() != 0) nutriments += "proteins: " + format.format(nutriScoreData.getProteins()) + "g\n";
+                        if(nutriScoreData.getSodium_value() != 0) nutriments += "sodium: " + format.format(nutriScoreData.getSodium_value()) + "g\n";
                     }
                     else
                     {
-                        nutriments += "energy: " + posten.getProduct().getNutriments().getEnergyKcal() + "kcal\n";
-                        nutriments += "sugar: "+ posten.getProduct().getNutriments().getSugarsValue() + posten.getProduct().getNutriments().getSugarsUnit() +"\n";
-                        nutriments += "fat: " + posten.getProduct().getNutriments().getSaturatedFatValue() +posten.getProduct().getNutriments().getSaturatedFatUnit()+ "\n";
-                        nutriments += "fiber: " + posten.getProduct().getNutriments().getFiberValue() +posten.getProduct().getNutriments().getFiberUnit()+ "\n";
-                        nutriments += "proteins: " + posten.getProduct().getNutriments().getProteinsValue() + posten.getProduct().getNutriments().getProteinsUnit() +"\n";
-                        nutriments += "sodium: " + posten.getProduct().getNutriscore_data().getSodium_value() + "g\n";
+                        nutriments += R.string.not_in_database;
                     }
 
                     Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
@@ -137,7 +154,7 @@ public class FoodActivity extends AppCompatActivity {
                 else
                 {
                     Log.d("MainFail","Niet Succesfull" +response.code());
-                    Toast.makeText(FoodActivity.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(FoodActivity.this, ScannerActivity.class));
                     finish();
                 }
@@ -146,7 +163,7 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<FoodInfo> call, Throwable t) {
                 Log.d("MainFail","Niet gelukt" + t.getMessage());
-                Toast.makeText(FoodActivity.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -163,7 +180,7 @@ public class FoodActivity extends AppCompatActivity {
             startActivity(searchKey);
         }
         else{
-            Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
         }
     }
 

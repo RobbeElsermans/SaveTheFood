@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isOnline(this))
         {
-            Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.no_internet_connection,Toast.LENGTH_LONG).show();
         }
     }
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(cameraScan);
     else
     {
-        EasyPermissions.requestPermissions(this, getString(R.string.camera_permission_text), CAMERA_PERM, Manifest.permission.CAMERA);
+        EasyPermissions.requestPermissions(this, getString(R.string.camera_permission), CAMERA_PERM, Manifest.permission.CAMERA);
     }
     }
 
@@ -76,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
-                Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
             }
         }
         else
         {
-            EasyPermissions.requestPermissions(this, getString(R.string.internet_permission_text), INTERNET_PERM, Manifest.permission.INTERNET);
+            EasyPermissions.requestPermissions(this, getString(R.string.internet_permission), INTERNET_PERM, Manifest.permission.INTERNET);
         }
     }
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "No valid browser found!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "No valid browser found!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

@@ -4,13 +4,16 @@
     <string name="btn_scan">SCAN</string>
     <string name="btn_favoriet">FAVORITE</string>
     <string name="btn_add">ADD</string>
-    <string name="text_scrollview">TextView eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</string>
     <string name="testFindBarcode">Find Barcode</string>
     <string name="textV_name">NAME:</string>
     <string name="btn_search">search</string>
     <string name="recipe_search_hint">Enter a product</string>
     <string name="Initial_Text_Product_Name">retreiving data from Database</string>
     <string name="source_of_recipe">Source of recipe</string>
-    <string name="camera_permission_text">This app needs access to your camera so you can take pictures of ingredients.</string>
-    <string name="internet_permission_text">This app needs access to your internet connection so it can search for recipes and ingredients in our database.</string>
+    <string name="camera_permission">This app needs access to your camera so you can take pictures of ingredients.</string>
+    <string name="internet_permission">This app needs access to your internet connection so it can search for recipes and ingredients in our database.</string>
+    <string name="no_search_key">please enter a search key!</string>
+    <string name="no_internet_connection">Please enable internet connectivity for best experience</string>
+    <string name="no_valid_browser">No valid browser found!</string>
+    <string name="not_in_database">not found in database!</string>
 </resources>
