@@ -82,6 +82,8 @@ public class Recipe implements Parcelable {
         return ingredientLines;
     }
 
+    @SerializedName("")
+
     @Override
     public int describeContents() {
         return 0;
