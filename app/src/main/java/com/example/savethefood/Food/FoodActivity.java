@@ -105,9 +105,26 @@ public class FoodActivity extends AppCompatActivity {
                 {
                     FoodInfo posten = response.body();
                     String nutriments = "";
-                    nutriments += "energy: " + posten.getProduct().getNutriscore_data().getEnergy_value() + "kcal\n";
-                    nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
-                    nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
+
+                    if (posten.getProduct().getNutriscore_data() != null)
+                    {
+                        nutriments += "energy: " + posten.getProduct().getNutriscore_data().getEnergy_value() + "kcal\n";
+                        nutriments += "sugar: "+ posten.getProduct().getNutriscore_data().getSugars() + "g\n";
+                        nutriments += "fat: " + posten.getProduct().getNutriscore_data().getSaturated_fat() + "g\n";
+                        nutriments += "fiber: " + posten.getProduct().getNutriscore_data().getFiber() + "g\n";
+                        nutriments += "proteins: " + posten.getProduct().getNutriscore_data().getProteins() + "g\n";
+                        nutriments += "sodium: " + posten.getProduct().getNutriscore_data().getSodium_value() + "g\n";
+                        nutriments += "sugar: " + posten.getProduct().getNutriscore_data().getSugars() + "g\n";
+                    }
+                    else
+                    {
+                        nutriments += "energy: " + posten.getProduct().getNutriments().getEnergyKcal() + "kcal\n";
+                        nutriments += "sugar: "+ posten.getProduct().getNutriments().getSugarsValue() + posten.getProduct().getNutriments().getSugarsUnit() +"\n";
+                        nutriments += "fat: " + posten.getProduct().getNutriments().getSaturatedFatValue() +posten.getProduct().getNutriments().getSaturatedFatUnit()+ "\n";
+                        nutriments += "fiber: " + posten.getProduct().getNutriments().getFiberValue() +posten.getProduct().getNutriments().getFiberUnit()+ "\n";
+                        nutriments += "proteins: " + posten.getProduct().getNutriments().getProteinsValue() + posten.getProduct().getNutriments().getProteinsUnit() +"\n";
+                        nutriments += "sodium: " + posten.getProduct().getNutriscore_data().getSodium_value() + "g\n";
+                    }
 
                     Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
                     //Glide.tearDown();

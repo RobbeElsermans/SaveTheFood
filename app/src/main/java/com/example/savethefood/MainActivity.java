@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent cameraScan;
     private Intent searchRecipe;
 
-    private int CAMERA_PERM = 123;
+    private int CAMERA_PERM = 0;
+    private int INTERNET_PERM = 1;
 
     private EditText searchKey;
 
@@ -49,23 +50,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void scan(View view)
     {
-        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA))
+        //BRON: https://blog.mindorks.com/implementing-easy-permissions-in-android-android-tutorial
+        if (hasPermissionCamera())
         startActivity(cameraScan);
-        else
-        {
-            EasyPermissions.requestPermissions(this, getString(R.string.camera_permission_text), CAMERA_PERM, Manifest.permission.CAMERA);
-        }
+    else
+    {
+        EasyPermissions.requestPermissions(this, getString(R.string.camera_permission_text), CAMERA_PERM, Manifest.permission.CAMERA);
+    }
     }
 
+    private boolean hasPermissionCamera() {
+        return EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA);
+    }
+    private boolean hasPermissionInternet() {
+        return EasyPermissions.hasPermissions(this, Manifest.permission.INTERNET);
+    }
     public void searchRecipe(View view)
     {
-        if (!isEmpty(searchKey))
-        {
-            searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
-            startActivity(searchRecipe);
+        if(hasPermissionInternet()) {
+            if (!isEmpty(searchKey))
+            {
+
+                searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
+                startActivity(searchRecipe);
+
+            }
+            else{
+                Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            Toast.makeText(this, "please enter a search key!", Toast.LENGTH_SHORT).show();
+        else
+        {
+            EasyPermissions.requestPermissions(this, getString(R.string.internet_permission_text), INTERNET_PERM, Manifest.permission.INTERNET);
         }
     }
 
