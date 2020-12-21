@@ -20,5 +20,6 @@
     <string name="try_again_connecting">database not responding! Trying again </string>
     <string name="heading_nutriments">nutritional value</string>
     <string name="heading_ingredients">Ingredients</string>
+    <string name="barcode">barcode</string>
 
 </resources>

@@ -10,7 +10,9 @@
         android:id="@+id/linearLayoutprim1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,10 +28,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:hint="@string/recipe_search_hint"
-                android:textColor="@color/colorPrimaryDark"
                 android:autofillHints="@string/recipe_search_hint"
-                android:inputType="text" />
+                android:hint="@string/recipe_search_hint"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryDark" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_search_recipe"
@@ -52,29 +54,44 @@
             android:text="@string/btn_scan"
             app:icon="@drawable/icon_scan"
             app:iconGravity="textStart"
-            app:iconTint="@color/colorPrimaryDark"
-            />
+            app:iconTint="@color/colorPrimaryDark" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/barcode"
+        app:layout_constraintBottom_toTopOf="@+id/textview_product_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutprim1" />
 
     <TextView
         android:id="@+id/textview_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="@string/Initial_Text_Product_Name"
         android:textColor="@color/colorAccent"
-        android:textSize="20sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutprim1" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_barcode" />
 
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="172dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,8 +101,8 @@
             android:id="@+id/linearlayoutPrim2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal">
 
 
@@ -95,22 +112,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/heading_nutriments"/>
 
                 <TextView
-                    android:id="@+id/textview_barcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="barcode" />
+                    android:text="@string/heading_nutriments"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textview_nutriscores"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="nutri" />
+                    android:hint="@string/heading_nutriments"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
 
@@ -118,7 +133,7 @@
                 android:id="@+id/imageView_picture_food"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

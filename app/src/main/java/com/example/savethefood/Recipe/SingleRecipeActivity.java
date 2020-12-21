@@ -70,7 +70,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mSourceRecipe.setText(mRecipe.getSource());
 
         String text = "";
-        text += mRecipe.getIngredientLines().length + R.string.heading_ingredients;
+        text += String.valueOf(mRecipe.getIngredientLines().length) + R.string.heading_ingredients;
         mIngredientTitle.setText(text);
 
         text = "";

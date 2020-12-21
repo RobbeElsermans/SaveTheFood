@@ -112,7 +112,7 @@ public class FoodActivity extends AppCompatActivity {
                     FoodInfo posten = response.body();
                     String nutriments = "";
 
-                    if (posten.getProduct().getNutriscore_data() != null)
+                    if (posten.getProduct().getNutriments() != null)
                     {
                         Nutri nutri = posten.getProduct().getNutriments();
                         if(nutri.getEnergyValue() != 0) nutriments += "energy: " + format.format(nutri.getEnergyValue()) + nutri.getEnergyKcalUnit()+"\n";
@@ -127,7 +127,7 @@ public class FoodActivity extends AppCompatActivity {
                         if(nutri.getCarbohydratesValue() != 0) nutriments += "carbohydrate: " + format.format(nutri.getCarbohydratesValue()) + nutri.getCarbohydratesUnit()+ "\n";
                         if(nutri.getCholesterolValue() != 0) nutriments += "cholesterol: " + format.format(nutri.getCholesterolValue()) + nutri.getCholesterolUnit()+ "\n";
                     }
-                    else if(posten.getProduct().getNutriments() != null)
+                    else if(posten.getProduct().getNutriscore_data() != null)
                     {
                         NutriScoreData nutriScoreData = posten.getProduct().getNutriscore_data();
                         if(nutriScoreData.getEnergy_value() != 0) nutriments += "energy: " + format.format(nutriScoreData.getEnergy_value()) + "kcal\n";
@@ -151,7 +151,7 @@ public class FoodActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Log.d("MainFail","Niet Succesfull" +response.code());
+                    Log.d("MainFail",R.string.not_in_database + String.valueOf(response.code()));
                     Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(FoodActivity.this, ScannerActivity.class));
                     finish();
@@ -160,7 +160,7 @@ public class FoodActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FoodInfo> call, Throwable t) {
-                Log.d("MainFail","Niet gelukt" + t.getMessage());
+                Log.d("MainFail",R.string.not_responding_database + t.getMessage());
                 Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                 finish();
             }

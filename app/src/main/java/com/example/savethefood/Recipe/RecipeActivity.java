@@ -102,7 +102,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
                         mRecyclerView.setAdapter(mRecipesListAdapter);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(getRecipeInfo));
                     } else {
-                        Log.d(String.valueOf(RecipeActivity.this), "Not found in database" + response.code());
+                        Log.d(String.valueOf(RecipeActivity.this), R.string.not_in_database + String.valueOf(response.code()));
                         Toast.makeText(RecipeActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -110,7 +110,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
 
                 @Override
                 public void onFailure(Call<RecipeInfo> call, Throwable t) {
-                    Log.d(String.valueOf(RecipeActivity.this), "No connection with API" + t.getMessage());
+                    Log.d(String.valueOf(RecipeActivity.this), R.string.not_responding_database + t.getMessage());
                     if (mTryReconnect > 0) {
                         Toast.makeText(RecipeActivity.this, R.string.try_again_connecting + mTryReconnect, Toast.LENGTH_SHORT).show();
                         mTryReconnect--;
