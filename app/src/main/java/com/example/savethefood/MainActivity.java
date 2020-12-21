@@ -1,5 +1,6 @@
 package com.example.savethefood;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -16,10 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.savethefood.Recipe.RecipeActivity;
 import com.example.savethefood.Scanner.ScannerActivity;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends AppCompatActivity {
 
     private Intent cameraScan;
     private Intent searchRecipe;
+
+    private int CAMERA_PERM = 123;
 
     private EditText searchKey;
 
@@ -32,21 +37,28 @@ public class MainActivity extends AppCompatActivity {
 
         searchKey = findViewById(R.id.search_bar_item);
 
-        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
-        //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
-
-        if (!NetworkCheck.getInstance(this).isOnline())
+        if (!isOnline(this))
         {
             Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
         }
     }
 
-    public void scan(View view)
-    {
-        startActivity(cameraScan);
+    public static boolean isOnline(Context context) {
+        return NetworkCheck.getInstance(context).isOnline();
     }
 
-    public void searchRecipe(View view) {
+    public void scan(View view)
+    {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA))
+        startActivity(cameraScan);
+        else
+        {
+            EasyPermissions.requestPermissions(this, getString(R.string.camera_permission_text), CAMERA_PERM, Manifest.permission.CAMERA);
+        }
+    }
+
+    public void searchRecipe(View view)
+    {
         if (!isEmpty(searchKey))
         {
             searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
@@ -68,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void goToSite(View view) {
+    public void goToSite(View view)
+    {
+
         switch (view.getId())
         {
             case R.id.imgview_edamam:
@@ -103,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -134,20 +147,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     */
-    public boolean isNetworkAvailable() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectedWifi || haveConnectedMobile;
-    }
 }

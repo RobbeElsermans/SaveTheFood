@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.savethefood.MainActivity;
 import com.example.savethefood.NetworkCheck;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
@@ -62,7 +63,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
         getSearchKey = getIntent();
 
         //kijken of de extra key wel bestaat.
-        if (!isEmpty(getSearchKey.getStringExtra(EXTRA_Recieve_SearchKey)) && NetworkCheck.getInstance(this).isOnline())
+        if (!isEmpty(getSearchKey.getStringExtra(EXTRA_Recieve_SearchKey)) && MainActivity.isOnline(this))
         {
             mkeyword = getSearchKey.getStringExtra(EXTRA_Recieve_SearchKey);
             Retrofit retrofit = new Retrofit.Builder()
@@ -72,10 +73,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
             APIrecipe = retrofit.create(EDAMAMAPI.class);
 
             retrieveInfo(this);
-        }
-        else
-        {
-
         }
     }
 
