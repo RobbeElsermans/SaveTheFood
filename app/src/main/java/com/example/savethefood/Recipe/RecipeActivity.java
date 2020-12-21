@@ -103,7 +103,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(getRecipeInfo));
                     } else {
                         Log.d(String.valueOf(RecipeActivity.this), "Not found in database" + response.code());
-                        Toast.makeText(RecipeActivity.this, "not found in database!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecipeActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -112,15 +112,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
                 public void onFailure(Call<RecipeInfo> call, Throwable t) {
                     Log.d(String.valueOf(RecipeActivity.this), "No connection with API" + t.getMessage());
                     if (mTryReconnect > 0) {
-                        Toast.makeText(RecipeActivity.this, "database not responding! Trying again " + mTryReconnect, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecipeActivity.this, R.string.try_again_connecting + mTryReconnect, Toast.LENGTH_SHORT).show();
                         mTryReconnect--;
                         retrieveInfo(RecipeActivity.this);
                     } else {
-                        Toast.makeText(RecipeActivity.this, "database not responding! Check for internet connection.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RecipeActivity.this, R.string.not_responding_database, Toast.LENGTH_LONG).show();
                         finish();
                     }
-
-
                 }
             });
     }

@@ -80,7 +80,7 @@
                 android:id="@+id/textView_ingredients_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="amount Ingredients"
+                android:text="@string/heading_ingredients"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
@@ -88,14 +88,14 @@
                 android:id="@+id/textView_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ingredients"
+                android:text="@string/heading_ingredients"
                 android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/textView_nutrition_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nutrition"
+                android:text="@string/heading_nutriments"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                 android:id="@+id/textView_nutrition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nutritions"
+                android:text="@string/heading_nutriments"
                 android:textSize="18dp" />
 
         </LinearLayout>

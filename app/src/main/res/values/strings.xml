@@ -16,4 +16,9 @@
     <string name="no_internet_connection">Please enable internet connectivity for best experience</string>
     <string name="no_valid_browser">No valid browser found!</string>
     <string name="not_in_database">not found in database!</string>
+    <string name="not_responding_database">database not responding! Check for internet connection.</string>
+    <string name="try_again_connecting">database not responding! Trying again </string>
+    <string name="heading_nutriments">nutritional value</string>
+    <string name="heading_ingredients">Ingredients</string>
+
 </resources>

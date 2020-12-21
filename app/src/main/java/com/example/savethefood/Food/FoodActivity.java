@@ -79,7 +79,6 @@ public class FoodActivity extends AppCompatActivity {
         urlProduct = findViewById(R.id.imageView_picture_food);
         productName = findViewById(R.id.textview_product_name);
         editTextProductName = findViewById(R.id.editText_product_name);
-        nutriGrade = findViewById(R.id.imageView_nutri_grade);
 
         cameraScan = new Intent(this, ScannerActivity.class);
         searchKey  = new Intent(this, RecipeActivity.class);
@@ -144,9 +143,8 @@ public class FoodActivity extends AppCompatActivity {
                     }
 
                     Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
-                    //Glide.tearDown();
-                    String nutriGradePicture = "https://static.openfoodfacts.org/images/misc/nutriscore-" + posten.getProduct().getNutriscore_grade() + ".svg";
-                    Glide.with(FoodActivity.this).load(nutriGradePicture).into(nutriGrade);
+
+
                     productName.setText(posten.getProduct().getName());
                     nutriscore.setText(nutriments);
                     editTextProductName.setText(posten.getProduct().getName());

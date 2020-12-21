@@ -70,7 +70,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mSourceRecipe.setText(mRecipe.getSource());
 
         String text = "";
-        text += mRecipe.getIngredientLines().length + " Ingredients";
+        text += mRecipe.getIngredientLines().length + R.string.heading_ingredients;
         mIngredientTitle.setText(text);
 
         text = "";
@@ -119,7 +119,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         if (send.resolveActivity(getPackageManager()) != null) {
             startActivity(send);
         } else {
-            Toast.makeText(this, "No valid browser found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -27,7 +27,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:hint="@string/recipe_search_hint"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:autofillHints="@string/recipe_search_hint"
+                android:inputType="text" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_search_recipe"
@@ -62,18 +64,11 @@
         android:gravity="center"
         android:text="@string/Initial_Text_Product_Name"
         android:textColor="@color/colorAccent"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutprim1" />
-
-    <ImageView
-        android:id="@+id/imageView_nutri_grade"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollview"
@@ -93,16 +88,17 @@
             android:layout_marginRight="16dp"
             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+
             <LinearLayout
                 android:id="@+id/linearlayoutSec1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/heading_nutriments"/>
 
                 <TextView
                     android:id="@+id/textview_barcode"
@@ -117,15 +113,12 @@
                     android:hint="nutri" />
 
             </LinearLayout>
+
             <ImageView
                 android:id="@+id/imageView_picture_food"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-        </LinearLayout>
-
-
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
