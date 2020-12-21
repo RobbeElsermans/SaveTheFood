@@ -21,5 +21,6 @@
     <string name="heading_nutriments">nutritional value</string>
     <string name="heading_ingredients">Ingredients</string>
     <string name="barcode">barcode</string>
+    <string name="item_photo">picture</string>
 
 </resources>
