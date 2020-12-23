@@ -182,7 +182,6 @@
                     android:id="@+id/textview_nutri_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/heading_nutriments"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -191,7 +190,6 @@
                     android:id="@+id/textview_nutriscore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/heading_nutriments"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/textview_nutri_unit"
                     app:layout_constraintStart_toEndOf="@+id/textview_nutri_name"
@@ -201,7 +199,6 @@
                     android:id="@+id/textview_nutri_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/heading_nutriments"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

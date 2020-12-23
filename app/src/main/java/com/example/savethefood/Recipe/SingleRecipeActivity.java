@@ -78,8 +78,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         String name = "";
         String value = "";
         String unit = "";
-        String number = "";
-        String instruction = "";
+        StringBuilder number = new StringBuilder();
+        StringBuilder instruction = new StringBuilder();
         name = String.valueOf(mRecipe.getIngredientLines().length) + "  " + getResources().getString(R.string.heading_ingredients);
         mIngredientTitle.setText(name);
 
@@ -87,11 +87,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
         name = "";
 
         for (int x = 0; x < mRecipe.getIngredientLines().length; x++) {
-            number += (x + 1) + ") " + getResources().getString(R.string.line_ending);
-            instruction += mRecipe.getIngredientLines()[x] + getResources().getString(R.string.line_ending);
+            number.append(x + 1).append(") ").append(getResources().getString(R.string.line_ending));
+            instruction.append(mRecipe.getIngredientLines()[x]).append(getResources().getString(R.string.line_ending));
         }
-        mIngredientsNumber.setText(number);
-        mIngredients.setText(instruction);
+        mIngredientsNumber.setText(number.toString());
+        mIngredients.setText(instruction.toString());
 
 
         //getNutrients

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -58,13 +57,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
         String preference = "";
-        if (key.equals("amount_recipes"))
-        {
+        if (key.equals("amount_recipes")) {
             preference = sharedPreferences.getString("amount_recipes", "search_2");
         }
 
-        switch (preference)
-        {
+        switch (preference) {
             case "search_2":
                 AmountSearchRecipes = 2;
                 break;
@@ -93,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
@@ -108,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void scan(View view) {
         //BRON: https://blog.mindorks.com/implementing-easy-permissions-in-android-android-tutorial
-        if (hasPermissionCamera()) startActivity(cameraScan);
+        if (hasPermissionCamera())
+            startActivity(cameraScan);
         else
             EasyPermissions.requestPermissions(this, getString(R.string.camera_permission), CAMERA_PERM, Manifest.permission.CAMERA);
     }
@@ -136,8 +133,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     //bron: https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
     private boolean isEmpty(EditText etText) {
-        if (etText.getText().toString().trim().length() > 0) return false;
-        return true;
+        return etText.getText().toString().trim().length() <= 0;
     }
 
     public void goToSite(View view) {
@@ -150,8 +146,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (pagina != null) {
             Intent send = new Intent(Intent.ACTION_VIEW, pagina);
-            if (send.resolveActivity(getPackageManager()) != null) startActivity(send);
-            else Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+            if (send.resolveActivity(getPackageManager()) != null)
+                startActivity(send);
+            else
+                Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
 
         }
     }
