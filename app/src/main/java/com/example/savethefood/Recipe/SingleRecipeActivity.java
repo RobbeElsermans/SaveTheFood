@@ -43,8 +43,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         receiveIntent();
 
-        Log.d(String.valueOf(this), mRecipe.getLabel());
-
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
@@ -82,6 +80,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         //getNutrients
         text = "";
+        //text += mRecipe.getNutrients().getCA() + ",\n";
 
     }
 

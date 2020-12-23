@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Recipe implements Parcelable {
     protected Recipe(Parcel in) {
+        nutrients = in.readParcelable(Nutrients.class.getClassLoader());
         Image = in.readString();
         label = in.readString();
         sharelink = in.readString();
@@ -33,6 +34,7 @@ public class Recipe implements Parcelable {
 
     private int length;
     public int getLength(){return length;}
+
 
     @SerializedName("source")
     private String source;
@@ -82,7 +84,12 @@ public class Recipe implements Parcelable {
         return ingredientLines;
     }
 
-    @SerializedName("")
+    @SerializedName("totalNutrients")
+    private Nutrients nutrients;
+
+    public Nutrients getNutrients() {
+        return nutrients;
+    }
 
     @Override
     public int describeContents() {
@@ -91,6 +98,7 @@ public class Recipe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.nutrients, flags);
         dest.writeString(Image);
         dest.writeString(label);
         dest.writeString(sharelink);
