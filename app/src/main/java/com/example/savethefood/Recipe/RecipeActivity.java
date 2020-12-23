@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
     public final static String EXTRA_Recieve_SearchKey = "com.example.Scanner.ReceiveSearchKey";
     private String app_ID = "c4d00532";
     private String app_key = "025c0351897d2cd9fa6ea959a263f93b";
+    private int mAmountSearch;
 
     private int mTryReconnect = 2;
 
@@ -84,7 +86,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
     }
 
     public void retrieveInfo(RecipeActivity getRecipeInfo){
-        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword+"&to=2";
+        String url = "search?app_id="+app_ID+"&app_key="+app_key+"&q="+mkeyword+"&to=" + MainActivity.AmountSearchRecipes;
         Call<RecipeInfo> call = APIrecipe.getPosts(url);
 
             call.enqueue(new Callback<RecipeInfo>() {

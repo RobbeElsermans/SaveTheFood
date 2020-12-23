@@ -3,8 +3,10 @@ package com.example.savethefood;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,14 +16,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.savethefood.Recipe.RecipeActivity;
 import com.example.savethefood.Scanner.ScannerActivity;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    public static int AmountSearchRecipes;
     private Intent cameraScan;
     private Intent searchRecipe;
 
@@ -41,6 +45,44 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isOnline(this))
             Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+        setupSharedPreferences();
+    }
+
+    private void setupSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        onSharedPreferenceChanged(sharedPreferences, "amount_recipes");
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+        String preference = "";
+        Log.d("mainSharerpref", key);
+        if (key.equals("amount_recipes"))
+        {
+            preference = sharedPreferences.getString("amount_recipes", "search_2");
+        }
+        Log.d("mainSharerpref", preference);
+
+        switch (preference)
+        {
+            case "search_2":
+                AmountSearchRecipes = 2;
+                break;
+            case "search_5":
+                AmountSearchRecipes = 5;
+                break;
+            case "search_10":
+                AmountSearchRecipes = 10;
+                break;
+            case "search_20":
+                AmountSearchRecipes = 20;
+                break;
+            case "search_40":
+                AmountSearchRecipes = 40;
+                break;
+        }
     }
 
     @Override
@@ -115,4 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+
 }
