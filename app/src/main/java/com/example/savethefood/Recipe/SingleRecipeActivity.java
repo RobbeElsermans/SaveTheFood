@@ -83,67 +83,68 @@ public class SingleRecipeActivity extends AppCompatActivity {
         Nutrients nutri = mRecipe.getNutrients();
         text = "";
         if (nutri.getENERCKCAL() != null && nutri.getENERCKCAL().getQuantity() != 0)
-            text += nutri.getENERCKCAL().getLabel() + "  " + format.format(nutri.getENERCKCAL().getQuantity()) + "  " + nutri.getENERCKCAL().getUnit() + "\n\n";
+            text += getResources().getString(R.string.energy_text) + format.format(nutri.getENERCKCAL().getQuantity()) + "  " + nutri.getENERCKCAL().getUnit() + "\n\n";
         if (nutri.getFAT() != null && nutri.getFAT().getQuantity() != 0)
-            text += nutri.getFAT().getLabel() + "  " + format.format(nutri.getFAT().getQuantity()) + "  " + nutri.getFAT().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.fat_text) + format.format(nutri.getFAT().getQuantity()) + "  " + nutri.getFAT().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFASAT() != null && nutri.getFASAT().getQuantity() != 0)
-            text += "  " + nutri.getFASAT().getLabel() + "  " + format.format(nutri.getFASAT().getQuantity()) + "  " + nutri.getFASAT().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.fat_saturated_text) + format.format(nutri.getFASAT().getQuantity()) + "  " + nutri.getFASAT().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFATRN() != null && nutri.getFATRN().getQuantity() != 0)
-            text += "  " + nutri.getFATRN().getLabel() + "  " + format.format(nutri.getFATRN().getQuantity()) + "  " + nutri.getFATRN().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.fat_trans_text) + format.format(nutri.getFATRN().getQuantity()) + "  " + nutri.getFATRN().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFAMS() != null && nutri.getFAMS().getQuantity() != 0)
-            text += "  " + nutri.getFAMS().getLabel() + "  " + format.format(nutri.getFAMS().getQuantity()) + "  " + nutri.getFAMS().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.fat_monounsaturated_text) + format.format(nutri.getFAMS().getQuantity()) + "  " + nutri.getFAMS().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFAPU() != null && nutri.getFAPU().getQuantity() != 0)
-            text += "  " + nutri.getFAPU().getLabel() + "  " + format.format(nutri.getFAPU().getQuantity()) + "  " + nutri.getFAPU().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.fat_Polyunsaturated_text) + format.format(nutri.getFAPU().getQuantity()) + "  " + nutri.getFAPU().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getWATER() != null && nutri.getWATER().getQuantity() != 0)
-            text += nutri.getWATER().getLabel() + "  " + format.format(nutri.getWATER().getQuantity()) + "  " + nutri.getWATER().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.water_text) + format.format(nutri.getWATER().getQuantity()) + "  " + nutri.getWATER().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getCHOCDF() != null && nutri.getCHOCDF().getQuantity() != 0)
-            text += nutri.getCHOCDF().getLabel() + "  " + format.format(nutri.getCHOCDF().getQuantity()) + "  " + nutri.getCHOCDF().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.carbs_text) + format.format(nutri.getCHOCDF().getQuantity()) + "  " + nutri.getCHOCDF().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFIBTG() != null && nutri.getFIBTG().getQuantity() != 0)
-            text += "  " + nutri.getFIBTG().getLabel() + "  " + format.format(nutri.getFIBTG().getQuantity()) + "  " + nutri.getFIBTG().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.fiber_text) + format.format(nutri.getFIBTG().getQuantity()) + "  " + nutri.getFIBTG().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getSUGAR() != null && nutri.getSUGAR().getQuantity() != 0)
-            text += "  " + nutri.getSUGAR().getLabel() + "  " + format.format(nutri.getSUGAR().getQuantity()) + "  " + nutri.getSUGAR().getUnit() + getResources().getString(R.string.line_ending);
+            text += "  " + getResources().getString(R.string.sugar_text) + format.format(nutri.getSUGAR().getQuantity()) + "  " + nutri.getSUGAR().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getPROCNT() != null && nutri.getPROCNT().getQuantity() != 0)
-            text += nutri.getPROCNT().getLabel() + "  " + format.format(nutri.getPROCNT().getQuantity()) + "  " + nutri.getPROCNT().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.proteins_text) + format.format(nutri.getPROCNT().getQuantity()) + "  " + nutri.getPROCNT().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getCHOLE() != null && nutri.getCHOLE().getQuantity() != 0)
-            text += nutri.getCHOLE().getLabel() + "  " + format.format(nutri.getCHOLE().getQuantity()) + "  " + nutri.getCHOLE().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.cholesterol_text) + format.format(nutri.getCHOLE().getQuantity()) + "  " + nutri.getCHOLE().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getNA() != null && nutri.getNA().getQuantity() != 0)
-            text += nutri.getNA().getLabel() + "  " + format.format(nutri.getNA().getQuantity()) + "  " + nutri.getNA().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.sodium_text) + format.format(nutri.getNA().getQuantity()) + "  " + nutri.getNA().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getCA() != null && nutri.getCA().getQuantity() != 0)
-            text += nutri.getCA().getLabel() + "  " + format.format(nutri.getCA().getQuantity()) + "  " + nutri.getCA().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.calcium_text) + format.format(nutri.getCA().getQuantity()) + "  " + nutri.getCA().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getMG() != null && nutri.getMG().getQuantity() != 0)
-            text += nutri.getMG().getLabel() + "  " + format.format(nutri.getMG().getQuantity()) + "  " + nutri.getMG().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.magnesium_text) + format.format(nutri.getMG().getQuantity()) + "  " + nutri.getMG().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getK() != null && nutri.getK().getQuantity() != 0)
-            text += nutri.getK().getLabel() + "  " + format.format(nutri.getK().getQuantity()) + "  " + nutri.getK().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.potassium_text) + format.format(nutri.getK().getQuantity()) + "  " + nutri.getK().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFE() != null && nutri.getFE().getQuantity() != 0)
-            text += nutri.getFE().getLabel() + "  " + format.format(nutri.getFE().getQuantity()) + "  " + nutri.getFE().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.iron_text) + format.format(nutri.getFE().getQuantity()) + "  " + nutri.getFE().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getZN() != null && nutri.getZN().getQuantity() != 0)
-            text += nutri.getZN().getLabel() + "  " + format.format(nutri.getZN().getQuantity()) + "  " + nutri.getZN().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.zinc_text) + format.format(nutri.getZN().getQuantity()) + "  " + nutri.getZN().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getP() != null && nutri.getP().getQuantity() != 0)
-            text += nutri.getP().getLabel() + "  " + format.format(nutri.getP().getQuantity()) + "  " + nutri.getP().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.phosphorus_text) + format.format(nutri.getP().getQuantity()) + "  " + nutri.getP().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITARAE() != null && nutri.getVITARAE().getQuantity() != 0)
-            text += nutri.getVITARAE().getLabel() + "  " + format.format(nutri.getVITARAE().getQuantity()) + "  " + nutri.getVITARAE().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminA_text) + format.format(nutri.getVITARAE().getQuantity()) + "  " + nutri.getVITARAE().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITC() != null && nutri.getVITC().getQuantity() != 0)
-            text += nutri.getVITC().getLabel() + "  " + format.format(nutri.getVITC().getQuantity()) + "  " + nutri.getVITC().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminC_text) + format.format(nutri.getVITC().getQuantity()) + "  " + nutri.getVITC().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getTHIA() != null && nutri.getTHIA().getQuantity() != 0)
-            text += nutri.getTHIA().getLabel() + "  " + format.format(nutri.getTHIA().getQuantity()) + "  " + nutri.getTHIA().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.thiaminB1_text) + format.format(nutri.getTHIA().getQuantity()) + "  " + nutri.getTHIA().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getRIBF() != null && nutri.getRIBF().getQuantity() != 0)
-            text += nutri.getRIBF().getLabel() + "  " + format.format(nutri.getRIBF().getQuantity()) + "  " + nutri.getRIBF().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.riboflavinB2_text) + format.format(nutri.getRIBF().getQuantity()) + "  " + nutri.getRIBF().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getNIA() != null && nutri.getNIA().getQuantity() != 0)
-            text += nutri.getNIA().getLabel() + "  " + format.format(nutri.getNIA().getQuantity()) + "  " + nutri.getNIA().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.niacidB3_text) + format.format(nutri.getNIA().getQuantity()) + "  " + nutri.getNIA().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITB6A() != null && nutri.getVITB6A().getQuantity() != 0)
-            text += nutri.getVITB6A().getLabel() + "  " + format.format(nutri.getVITB6A().getQuantity()) + "  " + nutri.getVITB6A().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminB6_text) + format.format(nutri.getVITB6A().getQuantity()) + "  " + nutri.getVITB6A().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFOLFD() != null && nutri.getFOLFD().getQuantity() != 0)
-            text += nutri.getFOLFD().getLabel() + "  " + format.format(nutri.getFOLFD().getQuantity()) + "  " + nutri.getFOLFD().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.folate_food_text) + format.format(nutri.getFOLFD().getQuantity()) + "  " + nutri.getFOLFD().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getFOLAC() != null && nutri.getFOLAC().getQuantity() != 0)
-            text += nutri.getFOLAC().getLabel() + "  " + format.format(nutri.getFOLAC().getQuantity()) + "  " + nutri.getFOLAC().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.folic_acid_text) + format.format(nutri.getFOLAC().getQuantity()) + "  " + nutri.getFOLAC().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITB12() != null && nutri.getVITB12().getQuantity() != 0)
-            text += nutri.getVITB12().getLabel() + "  " + format.format(nutri.getVITB12().getQuantity()) + "  " + nutri.getVITB12().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminB12_text) + format.format(nutri.getVITB12().getQuantity()) + "  " + nutri.getVITB12().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITD() != null && nutri.getVITD().getQuantity() != 0)
-            text += nutri.getVITD().getLabel() + "  " + format.format(nutri.getVITD().getQuantity()) + "  " + nutri.getVITD().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminD_text) + format.format(nutri.getVITD().getQuantity()) + "  " + nutri.getVITD().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getTOCPHA() != null && nutri.getTOCPHA().getQuantity() != 0)
-            text += nutri.getTOCPHA().getLabel() + "  " + format.format(nutri.getTOCPHA().getQuantity()) + "  " + nutri.getTOCPHA().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminE_text) + format.format(nutri.getTOCPHA().getQuantity()) + "  " + nutri.getTOCPHA().getUnit() + getResources().getString(R.string.line_ending);
         if (nutri.getVITK1() != null && nutri.getVITK1().getQuantity() != 0)
-            text += nutri.getVITK1().getLabel() + "  " + format.format(nutri.getVITK1().getQuantity()) + "  " + nutri.getVITK1().getUnit() + getResources().getString(R.string.line_ending);
+            text += getResources().getString(R.string.vitaminK_text) + format.format(nutri.getVITK1().getQuantity()) + "  " + nutri.getVITK1().getUnit() + getResources().getString(R.string.line_ending);
+
         mNutritions.setText(text);
     }
 
