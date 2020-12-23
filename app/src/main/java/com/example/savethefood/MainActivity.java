@@ -58,12 +58,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
         String preference = "";
-        Log.d("mainSharerpref", key);
         if (key.equals("amount_recipes"))
         {
             preference = sharedPreferences.getString("amount_recipes", "search_2");
         }
-        Log.d("mainSharerpref", preference);
 
         switch (preference)
         {

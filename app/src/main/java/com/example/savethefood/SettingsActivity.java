@@ -10,7 +10,7 @@ import androidx.core.app.NavUtils;
 import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsActivity extends AppCompatActivity{
-
+    //BRON:https://medium.com/@bhavyakaria/step-by-step-guide-to-create-app-settings-using-preferences-in-android-part-1-fa470305b530
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +26,6 @@ public class SettingsActivity extends AppCompatActivity{
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

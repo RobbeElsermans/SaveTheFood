@@ -80,7 +80,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         String unit = "";
         String number = "";
         String instruction = "";
-        name = String.valueOf(mRecipe.getIngredientLines().length)+"  "+getResources().getString(R.string.heading_ingredients);
+        name = String.valueOf(mRecipe.getIngredientLines().length) + "  " + getResources().getString(R.string.heading_ingredients);
         mIngredientTitle.setText(name);
 
 
@@ -115,17 +115,17 @@ public class SingleRecipeActivity extends AppCompatActivity {
             unit += nutri.getFASAT().getUnit() + getResources().getString(R.string.line_ending);
         }
         if (nutri.getFATRN() != null && nutri.getFATRN().getQuantity() != 0) {
-            name +=  getResources().getString(R.string.fat_trans_text) + getResources().getString(R.string.line_ending);
+            name += getResources().getString(R.string.fat_trans_text) + getResources().getString(R.string.line_ending);
             value += format.format(nutri.getFATRN().getQuantity()) + getResources().getString(R.string.line_ending);
             unit += nutri.getFATRN().getUnit() + getResources().getString(R.string.line_ending);
         }
         if (nutri.getFAMS() != null && nutri.getFAMS().getQuantity() != 0) {
-            name +=  getResources().getString(R.string.fat_monounsaturated_text) + getResources().getString(R.string.line_ending);
+            name += getResources().getString(R.string.fat_monounsaturated_text) + getResources().getString(R.string.line_ending);
             value += format.format(nutri.getFAMS().getQuantity()) + getResources().getString(R.string.line_ending);
             unit += nutri.getFAMS().getUnit() + getResources().getString(R.string.line_ending);
         }
         if (nutri.getFAPU() != null && nutri.getFAPU().getQuantity() != 0) {
-            name +=  getResources().getString(R.string.fat_Polyunsaturated_text) + getResources().getString(R.string.line_ending);
+            name += getResources().getString(R.string.fat_Polyunsaturated_text) + getResources().getString(R.string.line_ending);
             value += format.format(nutri.getFAPU().getQuantity()) + getResources().getString(R.string.line_ending);
             unit += nutri.getFAPU().getUnit() + getResources().getString(R.string.line_ending);
         }
@@ -140,12 +140,12 @@ public class SingleRecipeActivity extends AppCompatActivity {
             unit += nutri.getCHOCDF().getUnit() + getResources().getString(R.string.line_ending);
         }
         if (nutri.getFIBTG() != null && nutri.getFIBTG().getQuantity() != 0) {
-            name +=  getResources().getString(R.string.fiber_text) + getResources().getString(R.string.line_ending);
+            name += getResources().getString(R.string.fiber_text) + getResources().getString(R.string.line_ending);
             value += format.format(nutri.getFIBTG().getQuantity()) + getResources().getString(R.string.line_ending);
             unit += nutri.getFIBTG().getUnit() + getResources().getString(R.string.line_ending);
         }
         if (nutri.getSUGAR() != null && nutri.getSUGAR().getQuantity() != 0) {
-            name +=  getResources().getString(R.string.sugar_text) + getResources().getString(R.string.line_ending);
+            name += getResources().getString(R.string.sugar_text) + getResources().getString(R.string.line_ending);
             value += format.format(nutri.getSUGAR().getQuantity()) + getResources().getString(R.string.line_ending);
             unit += nutri.getSUGAR().getUnit() + getResources().getString(R.string.line_ending);
         }
@@ -298,7 +298,16 @@ public class SingleRecipeActivity extends AppCompatActivity {
     }
 
     public void share() {
-        //Geef de url van de pagina mee
+
+        if (mRecipe.getWebsiteUrl() != null) {
+            Intent send = new Intent();
+            send.setAction(Intent.ACTION_SEND);
+            send.putExtra(Intent.EXTRA_TEXT, mRecipe.getWebsiteUrl());
+            send.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(send, "Share recipe");
+            startActivity(shareIntent);
+        }
     }
 
     public void goToSite(View view) {
