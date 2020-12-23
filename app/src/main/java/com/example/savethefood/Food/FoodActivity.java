@@ -106,12 +106,6 @@ public class FoodActivity extends AppCompatActivity {
         barcode.setText("barcode: " + barcodeText);
 
         retrieveInfo();
-
-        //barInfoRetreiver = new APIBarcode(url, barcodeText);
-
-        //data = barInfoRetreiver.getRequest();
-
-        //dataBarcode.setText(data.toString());
     }
 
     public void retrieveInfo() {
@@ -131,48 +125,45 @@ public class FoodActivity extends AppCompatActivity {
                     if (posten.getProduct().getNutriments() != null) {
                         Nutri nutri = posten.getProduct().getNutriments();
                         if (isEmpty(nutri.getEnergyValue()))
-                            nutriments += "energy: " + format.format(nutri.getEnergyValue()) + nutri.getEnergyKcalUnit() + "\n";
+                            nutriments += getResources().getString(R.string.energy_text) + format.format(nutri.getEnergyValue()) + nutri.getEnergyKcalUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getSugarsValue()))
-                            nutriments += "sugar: " + format.format(nutri.getSugarsValue()) + nutri.getSugarsUnit() + "\n";
+                            nutriments += getResources().getString(R.string.sugar_text) + format.format(nutri.getSugarsValue()) + nutri.getSugarsUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getSaturatedFatValue()))
-                            nutriments += "fat: " + format.format(nutri.getSaturatedFatValue()) + nutri.getSaturatedFatUnit() + "\n";
+                            nutriments += getResources().getString(R.string.fat_text) + format.format(nutri.getSaturatedFatValue()) + nutri.getSaturatedFatUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getFiberValue()))
-                            nutriments += "fiber: " + format.format(nutri.getFiberValue()) + nutri.getFiberUnit() + "\n";
+                            nutriments += getResources().getString(R.string.fiber_text) + format.format(nutri.getFiberValue()) + nutri.getFiberUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getProteinsValue()))
-                            nutriments += "proteins: " + format.format(nutri.getProteinsValue()) + nutri.getProteinsUnit() + "\n";
+                            nutriments += getResources().getString(R.string.proteins_text) + format.format(nutri.getProteinsValue()) + nutri.getProteinsUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getSodiumValue()))
-                            nutriments += "sodium: " + format.format(nutri.getSodiumValue()) + nutri.getSodiumUnit() + "\n";
+                            nutriments += getResources().getString(R.string.sodium_text) + format.format(nutri.getSodiumValue()) + nutri.getSodiumUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getIronValue()))
-                            nutriments += "iron: " + format.format(nutri.getIronValue()) + nutri.getIronUnit() + "\n";
+                            nutriments += getResources().getString(R.string.iron_text) + format.format(nutri.getIronValue()) + nutri.getIronUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getSaltValue()))
-                            nutriments += "salt: " + format.format(nutri.getSaltValue()) + nutri.getSaltUnit() + "\n";
+                            nutriments += getResources().getString(R.string.salt_text) + format.format(nutri.getSaltValue()) + nutri.getSaltUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getCalciumValue()))
-                            nutriments += "calcium: " + format.format(nutri.getCalciumValue()) + nutri.getCalciumUnit() + "\n";
+                            nutriments += getResources().getString(R.string.calcium_text) + format.format(nutri.getCalciumValue()) + nutri.getCalciumUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getCarbohydratesValue()))
-                            nutriments += "carbohydrate: " + format.format(nutri.getCarbohydratesValue()) + nutri.getCarbohydratesUnit() + "\n";
+                            nutriments += getResources().getString(R.string.carbohydrate_text) + format.format(nutri.getCarbohydratesValue()) + nutri.getCarbohydratesUnit() + getResources().getString(R.string.line_ending);
                         if (isEmpty(nutri.getCholesterolValue()))
-                            nutriments += "cholesterol: " + format.format(nutri.getCholesterolValue()) + nutri.getCholesterolUnit() + "\n";
+                            nutriments += getResources().getString(R.string.cholesterol_text) + format.format(nutri.getCholesterolValue()) + nutri.getCholesterolUnit() + getResources().getString(R.string.line_ending);
                     } else if (posten.getProduct().getNutriscore_data() != null) {
                         NutriScoreData nutriScoreData = posten.getProduct().getNutriscore_data();
                         if (isEmpty(nutriScoreData.getEnergy_value()))
-                            nutriments += "energy: " + format.format(nutriScoreData.getEnergy_value()) + "kcal\n";
+                            nutriments += getResources().getString(R.string.energy_text) + format.format(nutriScoreData.getEnergy_value()) + "kcal\n";
                         if (isEmpty(nutriScoreData.getSugars()))
-                            nutriments += "sugar: " + format.format(nutriScoreData.getSugars()) + "g\n";
+                            nutriments += getResources().getString(R.string.sugar_text) + format.format(nutriScoreData.getSugars()) + "g\n";
                         if (isEmpty(nutriScoreData.getSaturated_fat()))
-                            nutriments += "fat: " + format.format(nutriScoreData.getSaturated_fat()) + "g\n";
+                            nutriments += getResources().getString(R.string.fat_text) + format.format(nutriScoreData.getSaturated_fat()) + "g\n";
                         if (isEmpty(nutriScoreData.getFiber()))
-                            nutriments += "fiber: " + format.format(nutriScoreData.getFiber()) + "g\n";
+                            nutriments += getResources().getString(R.string.fiber_text) + format.format(nutriScoreData.getFiber()) + "g\n";
                         if (isEmpty(nutriScoreData.getProteins()))
-                            nutriments += "proteins: " + format.format(nutriScoreData.getProteins()) + "g\n";
+                            nutriments += getResources().getString(R.string.proteins_text) + format.format(nutriScoreData.getProteins()) + "g\n";
                         if (isEmpty(nutriScoreData.getSodium_value()))
-                            nutriments += "sodium: " + format.format(nutriScoreData.getSodium_value()) + "g\n";
-                    } else {
-                        nutriments += R.string.not_in_database;
-                    }
+                            nutriments += getResources().getString(R.string.sodium_text) + format.format(nutriScoreData.getSodium_value()) + "g\n";
+                    } else nutriments += R.string.not_in_database;
 
-                    if (nutriments.isEmpty()) {
-                        nutriments += "not nutriments available" + "\n";
-                    }
+                    if (nutriments.isEmpty())
+                        nutriments += "not nutriments available" + getResources().getString(R.string.line_ending);
                     Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
 
 
@@ -211,19 +202,19 @@ public class FoodActivity extends AppCompatActivity {
                         mNovaGroup.setText(String.valueOf((int) posten.getProduct().getNova_group()));
                         switch ((int) posten.getProduct().getNova_group()) {
                             case 1:
-                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_1));
+                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_1, null));
                                 break;
                             case 2:
-                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_2));
+                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_2, null));
                                 break;
                             case 3:
-                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_3));
+                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_3, null));
                                 break;
                             case 4:
-                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_4));
+                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.nova_4, null));
                                 break;
                             default:
-                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.white_color));
+                                mNovaGroup.setBackgroundColor(getResources().getColor(R.color.white_color, null));
                                 break;
                         }
                     }
@@ -257,39 +248,24 @@ public class FoodActivity extends AppCompatActivity {
         if (!isEmpty(editTextProductName)) {
             searchKey.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, editTextProductName.getText().toString());
             startActivity(searchKey);
-        } else {
-            Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
-        }
+        } else Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
     }
 
     private boolean isEmpty(EditText etText) {
-        if (etText.getText().toString().trim().length() > 0)
-            return false;
-
+        if (etText.getText().toString().trim().length() > 0) return false;
         return true;
     }
 
     public void goToSite(View view) {
-        if (view.getId() == R.id.btn_product_nutri_score) {
-            String url = "https://nl.wikipedia.org/wiki/Nutri-Score";
-            Uri page = Uri.parse(url);
+        Uri page = null;
+        if (view.getId() == R.id.btn_product_nutri_score)
+            page = Uri.parse(getResources().getString(R.string.url_wikipedia_nutri_info));
+        if (view.getId() == R.id.btn_product_nova_score)
+            page = Uri.parse(getResources().getString(R.string.url_openfoodfacts_nova_info));
+        if (page != null) {
             Intent send = new Intent(Intent.ACTION_VIEW, page);
-            if (send.resolveActivity(getPackageManager()) != null) {
-                startActivity(send);
-            } else {
-                Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if (view.getId() == R.id.btn_product_nova_score) {
-            String url = "https://world.openfoodfacts.org/nova";
-            Uri page = Uri.parse(url);
-            Intent send = new Intent(Intent.ACTION_VIEW, page);
-            if (send.resolveActivity(getPackageManager()) != null) {
-                startActivity(send);
-            } else {
-                Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
-            }
+            if (send.resolveActivity(getPackageManager()) != null) startActivity(send);
+            else Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
         }
     }
 }
