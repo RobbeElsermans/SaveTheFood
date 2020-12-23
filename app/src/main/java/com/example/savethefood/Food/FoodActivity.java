@@ -40,6 +40,8 @@ public class FoodActivity extends AppCompatActivity {
     private Intent searchKey;
 
     private TextView mNutriScore;
+    private TextView mNutriName;
+    private TextView mNutriUnit;
     private TextView mNovaGroup;
     private TextView barcode;
     private TextView nutriscore;
@@ -83,7 +85,11 @@ public class FoodActivity extends AppCompatActivity {
                 .listener(new SvgSoftwareLayerSetter<Uri>());
 */
         barcode = findViewById(R.id.textview_barcode);
-        nutriscore = findViewById(R.id.textview_nutriscores);
+        nutriscore = findViewById(R.id.textview_nutriscore);
+        mNutriName = findViewById(R.id.textview_nutri_name);
+        mNutriUnit = findViewById(R.id.textview_nutri_unit);
+
+
         urlProduct = findViewById(R.id.imageView_picture_food);
         productName = findViewById(R.id.textview_product_name);
         editTextProductName = findViewById(R.id.editText_product_name);
@@ -121,54 +127,111 @@ public class FoodActivity extends AppCompatActivity {
 
                     FoodInfo posten = response.body();
                     String nutriments = "";
+                    String names = "";
+                    String units = "";
 
                     if (posten.getProduct().getNutriments() != null) {
                         Nutri nutri = posten.getProduct().getNutriments();
-                        if (isEmpty(nutri.getEnergyValue()))
-                            nutriments += getResources().getString(R.string.energy_text) + format.format(nutri.getEnergyValue()) + nutri.getEnergyKcalUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getSugarsValue()))
-                            nutriments += getResources().getString(R.string.sugar_text) + format.format(nutri.getSugarsValue()) + nutri.getSugarsUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getSaturatedFatValue()))
-                            nutriments += getResources().getString(R.string.fat_text) + format.format(nutri.getSaturatedFatValue()) + nutri.getSaturatedFatUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getFiberValue()))
-                            nutriments += getResources().getString(R.string.fiber_text) + format.format(nutri.getFiberValue()) + nutri.getFiberUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getProteinsValue()))
-                            nutriments += getResources().getString(R.string.proteins_text) + format.format(nutri.getProteinsValue()) + nutri.getProteinsUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getSodiumValue()))
-                            nutriments += getResources().getString(R.string.sodium_text) + format.format(nutri.getSodiumValue()) + nutri.getSodiumUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getIronValue()))
-                            nutriments += getResources().getString(R.string.iron_text) + format.format(nutri.getIronValue()) + nutri.getIronUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getSaltValue()))
-                            nutriments += getResources().getString(R.string.salt_text) + format.format(nutri.getSaltValue()) + nutri.getSaltUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getCalciumValue()))
-                            nutriments += getResources().getString(R.string.calcium_text) + format.format(nutri.getCalciumValue()) + nutri.getCalciumUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getCarbohydratesValue()))
-                            nutriments += getResources().getString(R.string.carbohydrate_text) + format.format(nutri.getCarbohydratesValue()) + nutri.getCarbohydratesUnit() + getResources().getString(R.string.line_ending);
-                        if (isEmpty(nutri.getCholesterolValue()))
-                            nutriments += getResources().getString(R.string.cholesterol_text) + format.format(nutri.getCholesterolValue()) + nutri.getCholesterolUnit() + getResources().getString(R.string.line_ending);
+                        if (isEmpty(nutri.getEnergyValue())) {
+                            names += getResources().getString(R.string.energy_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getEnergyValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getEnergyKcalUnit() + getResources().getString(R.string.line_ending);
+
+                        }
+                        if (isEmpty(nutri.getSugarsValue())) {
+                            names += getResources().getString(R.string.sugar_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getSugarsValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getSugarsUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getSaturatedFatValue())) {
+                            names += getResources().getString(R.string.fat_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getSaturatedFatValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getSaturatedFatUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getFiberValue())) {
+                            names += getResources().getString(R.string.fiber_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getFiberValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getFiberUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getProteinsValue())) {
+                            names += getResources().getString(R.string.proteins_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getProteinsValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getProteinsUnit() + getResources().getString(R.string.line_ending);
+                        }
+
+                        if (isEmpty(nutri.getSodiumValue())) {
+                            names += getResources().getString(R.string.sodium_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getSodiumValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getSodiumUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getIronValue())) {
+                            names += getResources().getString(R.string.iron_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getIronValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getIronUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getSaltValue())) {
+                            names += getResources().getString(R.string.salt_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getSaltValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getSaltUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getCalciumValue())) {
+                            names += getResources().getString(R.string.calcium_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getCalciumValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getCalciumUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getCarbohydratesValue())) {
+                            names += getResources().getString(R.string.carbohydrate_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getCarbohydratesValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getCarbohydratesUnit() + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutri.getCholesterolValue())) {
+                            names += getResources().getString(R.string.cholesterol_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutri.getCholesterolValue()) + getResources().getString(R.string.line_ending);
+                            units += nutri.getCholesterolUnit() + getResources().getString(R.string.line_ending);
+                        }
                     } else if (posten.getProduct().getNutriscore_data() != null) {
                         NutriScoreData nutriScoreData = posten.getProduct().getNutriscore_data();
-                        if (isEmpty(nutriScoreData.getEnergy_value()))
-                            nutriments += getResources().getString(R.string.energy_text) + format.format(nutriScoreData.getEnergy_value()) + "kcal\n";
-                        if (isEmpty(nutriScoreData.getSugars()))
-                            nutriments += getResources().getString(R.string.sugar_text) + format.format(nutriScoreData.getSugars()) + "g\n";
-                        if (isEmpty(nutriScoreData.getSaturated_fat()))
-                            nutriments += getResources().getString(R.string.fat_text) + format.format(nutriScoreData.getSaturated_fat()) + "g\n";
-                        if (isEmpty(nutriScoreData.getFiber()))
-                            nutriments += getResources().getString(R.string.fiber_text) + format.format(nutriScoreData.getFiber()) + "g\n";
-                        if (isEmpty(nutriScoreData.getProteins()))
-                            nutriments += getResources().getString(R.string.proteins_text) + format.format(nutriScoreData.getProteins()) + "g\n";
-                        if (isEmpty(nutriScoreData.getSodium_value()))
-                            nutriments += getResources().getString(R.string.sodium_text) + format.format(nutriScoreData.getSodium_value()) + "g\n";
+                        if (isEmpty(nutriScoreData.getEnergy_value())) {
+                            names += getResources().getString(R.string.energy_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getEnergy_value()) + getResources().getString(R.string.line_ending);
+                            units += "kcal" + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutriScoreData.getSugars())) {
+                            names += getResources().getString(R.string.sugar_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getSugars()) + getResources().getString(R.string.line_ending);
+                            units += "g" + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutriScoreData.getSaturated_fat())) {
+                            names += getResources().getString(R.string.fat_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getSaturated_fat()) + getResources().getString(R.string.line_ending);
+                            units += "g" + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutriScoreData.getFiber())) {
+                            names += getResources().getString(R.string.fiber_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getFiber()) + getResources().getString(R.string.line_ending);
+                            units += "g" + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutriScoreData.getProteins())) {
+                            names += getResources().getString(R.string.proteins_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getProteins()) + getResources().getString(R.string.line_ending);
+                            units += "g" + getResources().getString(R.string.line_ending);
+                        }
+                        if (isEmpty(nutriScoreData.getSodium_value())) {
+                            names += getResources().getString(R.string.sodium_text) + getResources().getString(R.string.line_ending);
+                            nutriments += format.format(nutriScoreData.getSodium_value()) + getResources().getString(R.string.line_ending);
+                            units += "g" + getResources().getString(R.string.line_ending);
+                        }
                     } else nutriments += R.string.not_in_database;
 
                     if (nutriments.isEmpty())
-                        nutriments += "not nutriments available" + getResources().getString(R.string.line_ending);
+                        names += "not nutriments available" + getResources().getString(R.string.line_ending);
                     Glide.with(FoodActivity.this).load(posten.getProduct().getImage_url()).into(urlProduct);
 
 
                     productName.setText(posten.getProduct().getName());
+                    mNutriName.setText(names);
                     nutriscore.setText(nutriments);
+                    mNutriUnit.setText(units);
                     editTextProductName.setText(posten.getProduct().getName());
                     if (posten.getProduct().getNutriscore_grade() != null) {
                         if (!posten.getProduct().getNutriscore_grade().equals("")) {
