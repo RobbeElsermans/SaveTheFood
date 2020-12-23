@@ -108,21 +108,6 @@
                 android:text="@string/heading_nutriments"
                 android:textSize="18sp" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <TableRow>
-                <TextView
-                    android:text="eeee"/>
-
-            </TableRow/>
-
-
-
-
-            </TableLayout>
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
