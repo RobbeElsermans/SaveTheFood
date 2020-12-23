@@ -62,5 +62,9 @@
     <string name="url_openfoodfacts_nova_info">https://world.openfoodfacts.org/nova</string>
     <string name="url_edamam">https://www.edamam.com/</string>
     <string name="url_openfoodfacts">https://be-en.openfoodfacts.org/</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="amount_recipes_title">Amount of search items</string>
+    <string name="action_settings">Settings</string>
+
 
 </resources>

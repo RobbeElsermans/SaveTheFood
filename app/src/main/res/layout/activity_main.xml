@@ -48,7 +48,7 @@
             android:hint="@string/recipe_search_hint"
             android:textColor="@color/colorPrimaryDark"/>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btn_search_recipe"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -57,7 +57,9 @@
             android:text="@string/btn_search"
             app:icon="@drawable/icon_search"
             app:iconGravity="textStart"
-            app:iconTint="@color/colorPrimaryDark"/>
+            app:iconTint="@color/colorPrimaryDark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -70,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_layout">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btn_scan"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -81,9 +83,10 @@
             app:icon="@drawable/icon_scan"
             app:iconGravity="textStart"
             app:iconTint="@color/colorPrimaryDark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
 
             android:id="@+id/btnDownloadPdf"
             android:layout_width="0dp"
@@ -93,7 +96,8 @@
             app:icon="@drawable/icon_favorite"
             android:text="@string/btn_favoriet"
             app:iconGravity="textStart"
-            app:iconTint="@color/colorPrimaryDark"/>
+            app:iconTint="@color/colorPrimaryDark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 
     </LinearLayout>
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="amount_search_items">
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="amount_search_values">
+        <item>search_2</item>
+        <item>search_5</item>
+        <item>search_10</item>
+        <item>search_20</item>
+        <item>search_40</item>
+    </string-array>
+</resources>

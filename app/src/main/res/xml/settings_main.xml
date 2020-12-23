@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="search preferences">
+
+        <ListPreference
+            app:key="amount_recipes"
+            app:title="@string/amount_recipes_title"
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue="amount_2"
+            app:entries="@array/amount_search_items"
+            app:entryValues="@array/amount_search_values" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
