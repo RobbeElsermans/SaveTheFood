@@ -15,15 +15,12 @@ import java.io.OutputStreamWriter;
 
 public class FileStream {
 
-    private String fileLocation;
-    private File filePath;
     private File file;
 
     public FileStream(String location,Context context)
     {
-        this.fileLocation = location;
-        filePath = context.getFilesDir();
-        file = new File(filePath, fileLocation);
+        File filePath = context.getFilesDir();
+        file = new File(filePath, location);
     }
     public void writeRecipeToFile(String data) throws IOException {
 
@@ -40,28 +37,19 @@ public class FileStream {
         }
 
         //data = "";
-        FileOutputStream stream = new FileOutputStream(file);
-        try {
+        try (FileOutputStream stream = new FileOutputStream(file)) {
             stream.write(data.getBytes());
-        } catch (IOException e)
-        {
-        } finally {
-            stream.close();
+        } catch (IOException e) {
         }
     }
 
-    public void writeNewRecipesToFile(String data) throws IOException {
-
-        FileOutputStream stream = new FileOutputStream(file);
-        data =  "[" + data + "]";
-        try {
+    public void writeNewRecipesToFile(String data){
+        try (FileOutputStream stream = new FileOutputStream(file)) {
+            if (!data.isEmpty())
+                data = "[" + data + "]";
             stream.write(data.getBytes());
-        } catch (IOException e)
-        {
-        } finally {
-            stream.close();
+        } catch (IOException e) {
         }
-
     }
 
     public String readFromFile() throws IOException {
@@ -69,58 +57,12 @@ public class FileStream {
 
         byte[] bytes = new byte[length];
 
-        FileInputStream in = new FileInputStream(file);
-        try {
+        try (FileInputStream in = new FileInputStream(file)) {
             in.read(bytes);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            in.close();
         }
 
         return new String(bytes);
     }
-/*
-    public void writeToFile(String data, Context context) {
-
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileLocation, Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
-            outputStreamWriter.close();
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-    public String readFromFile(Context context) {
-
-        String ret = "";
-
-        try {
-            InputStream inputStream = context.openFileInput(fileLocation);
-
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append("\n").append(receiveString);
-                }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
-            }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-
-        return ret;
-    }
-
- */
 }

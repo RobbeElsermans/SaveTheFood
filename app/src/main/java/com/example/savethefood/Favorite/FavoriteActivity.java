@@ -63,14 +63,12 @@ public class FavoriteActivity extends AppCompatActivity implements RecipeListAda
     @Override
     protected void onStop() {
         super.onStop();
-
-        String text = jsonConverter.ArrayToStringConverter(recipes);
-
-        try {
-            fileStream.writeNewRecipesToFile(text);
-        } catch (IOException e) {
-            e.printStackTrace();
+        String text;
+        if (recipes.size() != 0) {
+            text = jsonConverter.ArrayToStringConverter(recipes);
         }
+        else text = "";
+        fileStream.writeNewRecipesToFile(text);
     }
 
     private void receiveIntent()
