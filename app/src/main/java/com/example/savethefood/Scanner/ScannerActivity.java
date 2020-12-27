@@ -1,36 +1,54 @@
-package com.example.savethefood;
+package com.example.savethefood.Scanner;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.savethefood.Food.FoodActivity;
+import com.example.savethefood.NetworkCheck;
+import com.example.savethefood.R;
 import com.google.zxing.Result;
 
-public class Scanner extends AppCompatActivity {
+/*  Bronnen
+https://github.com/yuriy-budiyev/code-scanner
+https://androiddvlpr.com/zxing-android-example/
+https://androidhiro.com/source/android/example/code-scanner/5610
+https://androiddvlpr.com/zxing-android-example/
+
+ */
+
+public class ScannerActivity extends AppCompatActivity {
 
     public final static String EXTRA_RETURN_BARCODE = "com.example.Scanner.RETURN_BARCODE";
     Intent returnBarcode;
 
-    CodeScanner codeScanner;
-    CodeScannerView scannerview;
+    private CodeScanner codeScanner;
+    private CodeScannerView scannerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!NetworkCheck.getInstance(this).isOnline())
+        {
+            Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        Intent ReceiveIntent = getIntent();
+
         setContentView(R.layout.activity_scanner);
         scannerview = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerview);
 
-        returnBarcode = new Intent(this, TestFindBarcode.class);
+        returnBarcode = new Intent(this, FoodActivity.class);
 
-        Intent ReceiveIntent = getIntent();
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -39,6 +57,7 @@ public class Scanner extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getText());
                         startActivity(returnBarcode);
                         finish();
@@ -54,7 +73,9 @@ public class Scanner extends AppCompatActivity {
         codeScanner.startPreview();
     }
 
-    public void newScan(View view) {
-        codeScanner.startPreview();
+    @Override
+    protected void onPause() {
+        super.onPause();
+        codeScanner.releaseResources();
     }
 }

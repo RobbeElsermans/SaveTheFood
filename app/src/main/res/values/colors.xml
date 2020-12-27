@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#6A94D4</color>
+    <color name="colorPrimaryDark">#052F6D</color>
+    <color name="colorAccent">#34CFBE</color>
+
+    <color name="colorSecondary">#5DCFC3</color>
+    <color name="colorSecondaryDark" >#00675C</color>
+
+    <color name="score_a">#136717</color>
+    <color name="score_b">#5BA625</color>
+    <color name="score_c">#E4D018</color>
+    <color name="score_d">#B16311</color>
+    <color name="score_e">#AA4117</color>
+    <color name="white_color">#FFFFFF</color>
+
+
+    <color name="nova_1">#5BA625</color>
+    <color name="nova_2">#E4D018</color>
+    <color name="nova_3">#B16311</color>
+    <color name="nova_4">#AA4117</color>
+
 </resources>
