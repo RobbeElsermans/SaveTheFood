@@ -24,7 +24,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-
+    public static final String FAVORITE_FILE_NAME = "favorite.txt";
     public static int AmountSearchRecipes;
     private Intent cameraScan;
     private Intent searchRecipe;
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private int CAMERA_PERM = 0;
     private int INTERNET_PERM = 1;
     private int WRITE_STORAGE_PERM = 2;
-    private int READ_STORAGE_PERM = 3;
 
     private EditText searchKey;
 
@@ -137,14 +136,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void favorite(View view) {
-        if (hasPermissionReadStorage())
-        {
-
-        }
-        else
-        {
-            EasyPermissions.requestPermissions(this, getString(R.string.storage_permission), READ_STORAGE_PERM, Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
         if (hasPermissionWriteStorage())
         {
 

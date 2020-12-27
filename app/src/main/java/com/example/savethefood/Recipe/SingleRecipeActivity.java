@@ -3,6 +3,7 @@ package com.example.savethefood.Recipe;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.savethefood.MainActivity;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Nutrients;
 import com.example.savethefood.Recipe.Model.Recipe;
+import com.example.savethefood.SaveData.FileStream;
+import com.example.savethefood.SaveData.jsonConverter;
+import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class SingleRecipeActivity extends AppCompatActivity {
@@ -35,6 +42,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView mNutritions;
     private TextView mNutrisionsName;
     private TextView mNutritionsUnits;
+
+    private jsonConverter jsonConverter;
+    private FileStream fileStream;
 
     private Recipe mRecipe;
 
@@ -57,6 +67,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
     }
 
     private void createContent() {
+        jsonConverter = new jsonConverter();
+        fileStream = new FileStream(MainActivity.FAVORITE_FILE_NAME, this);
 
         DecimalFormat format = new DecimalFormat("#.##");
 
@@ -267,7 +279,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 goToWebsite();
                 return true;
             case R.id.action_favorite:
-                addToFavorites();
+                try {
+                    addToFavorites();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return true;
             case R.id.action_share:
                 share();
@@ -293,8 +309,17 @@ public class SingleRecipeActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
     }
 
-    public void addToFavorites() {
-        //Sla de mRecipe op lokaal
+    public void addToFavorites() throws IOException
+    {
+        String text = jsonConverter.toStringConverter(mRecipe);
+
+        fileStream.writeToFile(text);
+
+        mRecipe = null;
+
+        Log.w("recieveText",fileStream.readFromFile());
+
+        Recipe[] recipe = jsonConverter.toRecipeObjects(fileStream.readFromFile());
     }
 
     public void share() {
