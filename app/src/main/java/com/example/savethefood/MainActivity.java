@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.example.savethefood.Favorite.FavoriteActivity;
+import com.example.savethefood.Permissions.Permission;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.Recipe.RecipeActivity;
 import com.example.savethefood.SaveData.FileStream;
@@ -38,9 +39,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private Intent cameraScan;
     private Intent searchRecipe;
 
-    private int CAMERA_PERM = 0;
-    private int INTERNET_PERM = 1;
-    private int WRITE_STORAGE_PERM = 2;
+    public static int CAMERA_PERM = 0;
+    public static int INTERNET_PERM = 1;
+    public static int WRITE_STORAGE_PERM = 2;
+
+    private Permission permission;
 
     private jsonConverter jsonConverter;
     private FileStream fileStream;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
         setupSharedPreferences();
 
+        permission = new Permission(this);
 
         jsonConverter = new jsonConverter();
         fileStream = new FileStream(FAVORITE_FILE_NAME, this);
@@ -122,50 +126,43 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void scan(View view) {
         //BRON: https://blog.mindorks.com/implementing-easy-permissions-in-android-android-tutorial
-        if (hasPermissionCamera())
+        if (permission.hasPermissionCamera())
             startActivity(cameraScan);
         else
-            EasyPermissions.requestPermissions(this, getString(R.string.camera_permission), CAMERA_PERM, Manifest.permission.CAMERA);
+            permission.requestPermission( getString(R.string.camera_permission), CAMERA_PERM, Manifest.permission.CAMERA);
     }
 
-    private boolean hasPermissionCamera() {
-        return EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA);
-    }
-    private boolean hasPermissionInternet() {
-        return EasyPermissions.hasPermissions(this, Manifest.permission.INTERNET);
-    }
-    private boolean hasPermissionReadStorage(){
-        return EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-    private boolean hasPermissionWriteStorage(){
-        return EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-    }
 
     public void searchRecipe(View view) {
-        if (hasPermissionInternet()) {
+        if (permission.hasPermissionInternet()) {
             if (!isEmpty(searchKey)) {
                 searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
                 startActivity(searchRecipe);
             } else Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
         } else
-            EasyPermissions.requestPermissions(this, getString(R.string.internet_permission), INTERNET_PERM, Manifest.permission.INTERNET);
+            permission.requestPermission( getString(R.string.internet_permission), INTERNET_PERM, Manifest.permission.INTERNET);
     }
 
     public void favorite(View view) throws IOException {
-        if (hasPermissionWriteStorage())
+        if (permission.hasPermissionWriteStorage())
         {
+            String internalStorageText = fileStream.readFromFile();
             Log.w("recieveText",fileStream.readFromFile());
-
-            ArrayList<Recipe> recipe = jsonConverter.toRecipeObjects(fileStream.readFromFile());
-            Intent intent = new Intent(this, FavoriteActivity.class);
-            intent.putParcelableArrayListExtra(FavoriteActivity.EXTRA_RECIPES_LOCAL,recipe);
-            startActivity(intent);
+            if(!internalStorageText.isEmpty())
+            {
+                ArrayList<Recipe> recipe = jsonConverter.toRecipeObjects(internalStorageText);
+                Intent intent = new Intent(this, FavoriteActivity.class);
+                intent.putParcelableArrayListExtra(FavoriteActivity.EXTRA_RECIPES_LOCAL,recipe);
+                startActivity(intent);
+            }
+            else Toast.makeText(this, R.string.no_favorites, Toast.LENGTH_SHORT).show();
         }
         else
         {
-            EasyPermissions.requestPermissions(this, getString(R.string.storage_permission), WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            permission.requestPermission( getString(R.string.storage_permission), WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
+
 
     //bron: https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
     private boolean isEmpty(EditText etText) {
@@ -186,14 +183,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 startActivity(send);
             else
                 Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
-
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-
 }

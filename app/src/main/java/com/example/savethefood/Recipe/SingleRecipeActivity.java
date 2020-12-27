@@ -1,5 +1,6 @@
 package com.example.savethefood.Recipe;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,17 +17,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.savethefood.Favorite.FavoriteActivity;
 import com.example.savethefood.MainActivity;
+import com.example.savethefood.Permissions.Permission;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Nutrients;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.SaveData.FileStream;
 import com.example.savethefood.SaveData.jsonConverter;
-import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class SingleRecipeActivity extends AppCompatActivity {
     public final static String EXTRA_Single_Recipe = "com.example.SingleRecipeActivity.SingleRecipe";
@@ -43,6 +47,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView mNutrisionsName;
     private TextView mNutritionsUnits;
 
+    private Permission permission;
+
     private jsonConverter jsonConverter;
     private FileStream fileStream;
 
@@ -52,6 +58,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
+
+        permission = new Permission(this);
 
         receiveIntent();
 
@@ -281,6 +289,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
             case R.id.action_favorite:
                 try {
                     addToFavorites();
+                    Toast.makeText(this, R.string.add_to_favorites, Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -311,9 +320,16 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     public void addToFavorites() throws IOException
     {
-        String text = jsonConverter.toStringConverter(mRecipe);
+        if (permission.hasPermissionWriteStorage())
+        {
+            String text = jsonConverter.toStringConverter(mRecipe);
 
-        fileStream.writeToFile(text);
+            fileStream.writeRecipeToFile(text);
+        }
+        else
+        {
+            permission.requestPermission(getString(R.string.storage_permission), MainActivity.WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
     }
 
     public void share() {

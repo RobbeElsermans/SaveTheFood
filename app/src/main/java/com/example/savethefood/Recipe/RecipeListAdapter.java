@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,15 +21,20 @@ import java.util.LinkedList;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 
     private ArrayList<Recipe> mRecipeList;
+    private Recipe mDeletedRecipe;
+    private int mDeletedRecipePosition;
+
     private LayoutInflater mInflater;
     private Context context;
     private OnNodeListener mOnNodeListener;
+    private View mRootview;
 
-    public RecipeListAdapter(Context context, ArrayList<Recipe> recipeList, OnNodeListener onNodeListener) {
+    public RecipeListAdapter(Context context, ArrayList<Recipe> recipeList, OnNodeListener onNodeListener, View mRootView) {
         mInflater = LayoutInflater.from(context);
         this.mRecipeList = recipeList;
         this.context = context;
         this.mOnNodeListener = onNodeListener;
+        this.mRootview = mRootView;
     }
 
     @NonNull
@@ -90,5 +96,25 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     public interface OnNodeListener{
         void onNodeClick(int position);
+    }
+
+    public void deleteItem(int position) {
+        mDeletedRecipe = mRecipeList.get(position);
+        mDeletedRecipePosition = position;
+        mRecipeList.remove(position);
+        notifyItemRemoved(position);
+        showUndoSnackbar();
+    }
+
+    private void showUndoSnackbar() {
+        //View view = View.findViewById(R.id.coordinator_layout);
+        Snackbar snackbar = Snackbar.make(mRootview, R.string.snack_bar_text, Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete());
+        snackbar.show();
+    }
+
+    private void undoDelete() {
+        mRecipeList.add(mDeletedRecipePosition, mDeletedRecipe);
+        notifyItemInserted(mDeletedRecipePosition);
     }
 }

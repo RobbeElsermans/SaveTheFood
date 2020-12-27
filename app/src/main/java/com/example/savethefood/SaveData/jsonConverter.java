@@ -18,6 +18,19 @@ public class jsonConverter {
         return gson.toJson(singleRecipe);
     }
 
+    public String ArrayToStringConverter (ArrayList<Recipe> recipes)
+    {
+        Gson gson = new Gson();
+        StringBuilder data;
+        data = new StringBuilder();
+        for (int i =0; i < recipes.size() - 1; i++)
+        {
+            data.append(gson.toJson(recipes.get(i))+ ",");
+        }
+        data.append(gson.toJson(recipes.get(recipes.size()-1)));
+
+        return data.toString();
+    }
 
 
     public Recipe toRecipeObject (String jsonString)

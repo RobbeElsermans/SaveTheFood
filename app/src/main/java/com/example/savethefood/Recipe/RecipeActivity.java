@@ -101,7 +101,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
                             recipes.add(recipeInfo.getHits().get(i).getRecept());
                         }
 
-                        mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes, RecipeActivity.this::onNodeClick);
+                        mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes, RecipeActivity.this::onNodeClick, null);
                         mRecyclerView.setAdapter(mRecipesListAdapter);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(getRecipeInfo));
                     } else {

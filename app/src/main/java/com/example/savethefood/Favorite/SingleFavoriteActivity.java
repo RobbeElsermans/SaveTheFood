@@ -1,11 +1,18 @@
 package com.example.savethefood.Favorite;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.savethefood.MainActivity;
@@ -15,6 +22,7 @@ import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.SaveData.FileStream;
 import com.example.savethefood.SaveData.jsonConverter;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class SingleFavoriteActivity extends AppCompatActivity {
@@ -49,6 +57,52 @@ public class SingleFavoriteActivity extends AppCompatActivity {
     private void receiveIntent() {
         Bundle bundle = getIntent().getExtras();
         mRecipe = bundle.getParcelable(EXTRA_Single_Recipe_Local);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_go_to_website:
+                goToWebsite();
+                return true;
+            case R.id.action_share:
+                share();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    private void goToWebsite() {
+        String url = mRecipe.getWebsiteUrl();
+        Uri page = Uri.parse(url);
+        Intent send = new Intent(Intent.ACTION_VIEW, page);
+        if (send.resolveActivity(getPackageManager()) != null)
+            startActivity(send);
+        else
+            Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+    }
+    public void share() {
+
+        if (mRecipe.getWebsiteUrl() != null) {
+            Intent send = new Intent();
+            send.setAction(Intent.ACTION_SEND);
+            send.putExtra(Intent.EXTRA_TEXT, mRecipe.getWebsiteUrl());
+            send.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(send, "Share recipe");
+            startActivity(shareIntent);
+        }
+    }
+
+    public void goToSite(View view) {
+        if (view.getId() == R.id.btn_search_recipe)
+            goToWebsite();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_single_favorite, menu);
+        return true;
     }
     private void createContent() {
         DecimalFormat format = new DecimalFormat("#.##");

@@ -25,7 +25,7 @@ public class FileStream {
         filePath = context.getFilesDir();
         file = new File(filePath, fileLocation);
     }
-    public void writeToFile(String data) throws IOException {
+    public void writeRecipeToFile(String data) throws IOException {
 
         String savedData = readFromFile();
         if (!savedData.isEmpty())
@@ -48,6 +48,20 @@ public class FileStream {
         } finally {
             stream.close();
         }
+    }
+
+    public void writeNewRecipesToFile(String data) throws IOException {
+
+        FileOutputStream stream = new FileOutputStream(file);
+        data =  "[" + data + "]";
+        try {
+            stream.write(data.getBytes());
+        } catch (IOException e)
+        {
+        } finally {
+            stream.close();
+        }
+
     }
 
     public String readFromFile() throws IOException {

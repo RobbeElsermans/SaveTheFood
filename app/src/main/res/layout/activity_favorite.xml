@@ -4,6 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favorite.FavoriteActivity">
+    tools:context=".Recipe.RecipeActivity"
+    android:id="@+id/favorites_root_view">
+    <TextView
+        android:id="@+id/textView_PreText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Searching for recipes"
+        android:gravity="center"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
