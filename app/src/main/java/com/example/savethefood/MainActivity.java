@@ -24,12 +24,15 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+
     public static int AmountSearchRecipes;
     private Intent cameraScan;
     private Intent searchRecipe;
 
     private int CAMERA_PERM = 0;
     private int INTERNET_PERM = 1;
+    private int WRITE_STORAGE_PERM = 2;
+    private int READ_STORAGE_PERM = 3;
 
     private EditText searchKey;
 
@@ -113,9 +116,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private boolean hasPermissionCamera() {
         return EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA);
     }
-
     private boolean hasPermissionInternet() {
         return EasyPermissions.hasPermissions(this, Manifest.permission.INTERNET);
+    }
+    private boolean hasPermissionReadStorage(){
+        return EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+    private boolean hasPermissionWriteStorage(){
+        return EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     public void searchRecipe(View view) {
@@ -129,6 +137,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void favorite(View view) {
+        if (hasPermissionReadStorage())
+        {
+
+        }
+        else
+        {
+            EasyPermissions.requestPermissions(this, getString(R.string.storage_permission), READ_STORAGE_PERM, Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (hasPermissionWriteStorage())
+        {
+
+        }
+        else
+        {
+            EasyPermissions.requestPermissions(this, getString(R.string.storage_permission), WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
     }
 
     //bron: https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty

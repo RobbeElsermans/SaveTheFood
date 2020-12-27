@@ -96,6 +96,7 @@
             app:icon="@drawable/icon_favorite"
             android:text="@string/btn_favoriet"
             app:iconGravity="textStart"
+            android:onClick="favorite"
             app:iconTint="@color/colorPrimaryDark"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 

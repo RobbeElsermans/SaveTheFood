@@ -304,6 +304,7 @@ public class FoodActivity extends AppCompatActivity {
     }
 
     public void Scan(View view) {
+        finish();
         startActivity(cameraScan);
     }
 

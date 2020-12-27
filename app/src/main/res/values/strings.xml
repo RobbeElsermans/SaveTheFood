@@ -12,6 +12,7 @@
     <string name="source_of_recipe">Source of recipe</string>
     <string name="camera_permission">This app needs access to your camera so it can take pictures of ingredients.</string>
     <string name="internet_permission">This app needs access to your internet connection so it can search for recipes and ingredients in our database.</string>
+    <string name="storage_permission">This app needs access to your storage to store favorite recipes offline</string>
     <string name="no_search_key">please enter a search key!</string>
     <string name="no_internet_connection">Please enable internet connectivity for best experience</string>
     <string name="no_valid_browser">No valid browser found!</string>
