@@ -18,6 +18,7 @@ import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.Recipe.Model.RecipeInfo;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import retrofit2.Call;
@@ -40,7 +41,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mRecipesListAdapter;
 
-    private LinkedList<Recipe> recipes = new LinkedList<>();
+    private ArrayList<Recipe> recipes = new ArrayList<>();
     private Intent getSearchKey;
 
     EDAMAMAPI APIrecipe;
@@ -97,7 +98,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListAdapt
                         RecipeInfo recipeInfo = response.body();
 
                         for (int i = 0; i < recipeInfo.getHits().size(); i++) {
-                            recipes.addLast(recipeInfo.getHits().get(i).getRecept());
+                            recipes.add(recipeInfo.getHits().get(i).getRecept());
                         }
 
                         mRecipesListAdapter = new RecipeListAdapter(getRecipeInfo, recipes, RecipeActivity.this::onNodeClick);

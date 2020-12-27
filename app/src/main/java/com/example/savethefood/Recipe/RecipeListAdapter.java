@@ -14,16 +14,17 @@ import com.bumptech.glide.Glide;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeListHolder> {
 
-    private LinkedList<Recipe> mRecipeList;
+    private ArrayList<Recipe> mRecipeList;
     private LayoutInflater mInflater;
     private Context context;
     private OnNodeListener mOnNodeListener;
 
-    public RecipeListAdapter(Context context, LinkedList<Recipe> recipeList, OnNodeListener onNodeListener) {
+    public RecipeListAdapter(Context context, ArrayList<Recipe> recipeList, OnNodeListener onNodeListener) {
         mInflater = LayoutInflater.from(context);
         this.mRecipeList = recipeList;
         this.context = context;

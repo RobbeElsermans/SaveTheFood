@@ -1,19 +1,11 @@
-package com.example.savethefood.Recipe;
+package com.example.savethefood.Favorite;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.savethefood.MainActivity;
@@ -22,14 +14,11 @@ import com.example.savethefood.Recipe.Model.Nutrients;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.SaveData.FileStream;
 import com.example.savethefood.SaveData.jsonConverter;
-import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.DecimalFormat;
 
-public class SingleRecipeActivity extends AppCompatActivity {
-    public final static String EXTRA_Single_Recipe = "com.example.SingleRecipeActivity.SingleRecipe";
+public class SingleFavoriteActivity extends AppCompatActivity {
+    public final static String EXTRA_Single_Recipe_Local = "com.example.SingleRecipeActivity.SingleRecipe";
 
     private ImageView mRecipeImage;
     private TextView mSourceRecipe;
@@ -42,16 +31,12 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView mNutritions;
     private TextView mNutrisionsName;
     private TextView mNutritionsUnits;
-
-    private jsonConverter jsonConverter;
-    private FileStream fileStream;
-
     private Recipe mRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_recipe);
+        setContentView(R.layout.activity_single_favorite);
 
         receiveIntent();
 
@@ -63,13 +48,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     private void receiveIntent() {
         Bundle bundle = getIntent().getExtras();
-        mRecipe = bundle.getParcelable(EXTRA_Single_Recipe);
+        mRecipe = bundle.getParcelable(EXTRA_Single_Recipe_Local);
     }
-
     private void createContent() {
-        jsonConverter = new jsonConverter();
-        fileStream = new FileStream(MainActivity.FAVORITE_FILE_NAME, this);
-
         DecimalFormat format = new DecimalFormat("#.##");
 
         this.setTitle(mRecipe.getLabel());
@@ -270,67 +251,5 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mNutrisionsName.setText(name);
         mNutritions.setText(value);
         mNutritionsUnits.setText(unit);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_go_to_website:
-                goToWebsite();
-                return true;
-            case R.id.action_favorite:
-                try {
-                    addToFavorites();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.action_share:
-                share();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_single_recipe, menu);
-        return true;
-    }
-
-    private void goToWebsite() {
-        String url = mRecipe.getWebsiteUrl();
-        Uri page = Uri.parse(url);
-        Intent send = new Intent(Intent.ACTION_VIEW, page);
-        if (send.resolveActivity(getPackageManager()) != null)
-            startActivity(send);
-        else
-            Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
-    }
-
-    public void addToFavorites() throws IOException
-    {
-        String text = jsonConverter.toStringConverter(mRecipe);
-
-        fileStream.writeToFile(text);
-    }
-
-    public void share() {
-
-        if (mRecipe.getWebsiteUrl() != null) {
-            Intent send = new Intent();
-            send.setAction(Intent.ACTION_SEND);
-            send.putExtra(Intent.EXTRA_TEXT, mRecipe.getWebsiteUrl());
-            send.setType("text/plain");
-
-            Intent shareIntent = Intent.createChooser(send, "Share recipe");
-            startActivity(shareIntent);
-        }
-    }
-
-    public void goToSite(View view) {
-        if (view.getId() == R.id.btn_search_recipe)
-            goToWebsite();
     }
 }

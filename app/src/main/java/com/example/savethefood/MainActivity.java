@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +18,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.example.savethefood.Favorite.FavoriteActivity;
+import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.Recipe.RecipeActivity;
+import com.example.savethefood.SaveData.FileStream;
+import com.example.savethefood.SaveData.jsonConverter;
 import com.example.savethefood.Scanner.ScannerActivity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -32,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private int CAMERA_PERM = 0;
     private int INTERNET_PERM = 1;
     private int WRITE_STORAGE_PERM = 2;
+
+    private jsonConverter jsonConverter;
+    private FileStream fileStream;
 
     private EditText searchKey;
 
@@ -47,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if (!isOnline(this))
             Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
         setupSharedPreferences();
+
+
+        jsonConverter = new jsonConverter();
+        fileStream = new FileStream(FAVORITE_FILE_NAME, this);
     }
 
     private void setupSharedPreferences() {
@@ -135,10 +151,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             EasyPermissions.requestPermissions(this, getString(R.string.internet_permission), INTERNET_PERM, Manifest.permission.INTERNET);
     }
 
-    public void favorite(View view) {
+    public void favorite(View view) throws IOException {
         if (hasPermissionWriteStorage())
         {
+            Log.w("recieveText",fileStream.readFromFile());
 
+            ArrayList<Recipe> recipe = jsonConverter.toRecipeObjects(fileStream.readFromFile());
+            Intent intent = new Intent(this, FavoriteActivity.class);
+            intent.putParcelableArrayListExtra(FavoriteActivity.EXTRA_RECIPES_LOCAL,recipe);
+            startActivity(intent);
         }
         else
         {

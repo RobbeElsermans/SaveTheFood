@@ -5,6 +5,10 @@ import android.util.Log;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class jsonConverter {
 
@@ -21,12 +25,11 @@ public class jsonConverter {
         Gson gson = new Gson();
         return gson.fromJson(jsonString, Recipe.class);
     }
-    public Recipe[] toRecipeObjects (String jsonString)
+    public ArrayList<Recipe> toRecipeObjects (String jsonString)
     {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        return gson.fromJson(jsonString, Recipe[].class);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        return gson.fromJson(jsonString, listType);
     }
 
     /*
