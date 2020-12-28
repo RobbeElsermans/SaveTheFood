@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.example.savethefood.Favorite.FavoriteActivity;
+import com.example.savethefood.GlobalUse.NetworkCheck;
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.Permissions.Permission;
 import com.example.savethefood.Recipe.Model.Recipe;
 import com.example.savethefood.Recipe.RecipeActivity;
@@ -27,10 +28,7 @@ import com.example.savethefood.SaveData.jsonConverter;
 import com.example.savethefood.Scanner.ScannerActivity;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -38,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static int AmountSearchRecipes;
     private Intent cameraScan;
     private Intent searchRecipe;
+    private Toaster toaster;
 
     public static int CAMERA_PERM = 0;
     public static int INTERNET_PERM = 1;
@@ -57,10 +56,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         cameraScan = new Intent(this, ScannerActivity.class);
         searchRecipe = new Intent(this, RecipeActivity.class);
 
+        toaster = new Toaster(this);
+
         searchKey = findViewById(R.id.search_bar_item);
 
         if (!isOnline(this))
-            Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+            toaster.longToast(getString(R.string.no_internet_connection));
         setupSharedPreferences();
 
         permission = new Permission(this);
@@ -77,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
         String preference = "";
         if (key.equals("amount_recipes")) {
             preference = sharedPreferences.getString("amount_recipes", "search_2");
         }
 
+        if (preference != null)
         switch (preference) {
             case "search_2":
                 AmountSearchRecipes = 2;
@@ -138,16 +139,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if (!isEmpty(searchKey)) {
                 searchRecipe.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, searchKey.getText().toString());
                 startActivity(searchRecipe);
-            } else Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
+            } else toaster.shortToast(getString(R.string.no_search_key));
         } else
             permission.requestPermission( getString(R.string.internet_permission), INTERNET_PERM, Manifest.permission.INTERNET);
     }
 
-    public void favorite(View view) throws IOException {
+    public void favorite(View view){
         if (permission.hasPermissionWriteStorage())
         {
-            String internalStorageText = fileStream.readFromFile();
-            Log.w("recieveText",fileStream.readFromFile());
+            String internalStorageText = "";
+            try{
+            internalStorageText = fileStream.readFromFile();
+            }
+            catch(IOException e) {
+                toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
+            }
             if(!internalStorageText.isEmpty())
             {
                 ArrayList<Recipe> recipe = jsonConverter.toRecipeObjects(internalStorageText);
@@ -155,14 +161,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 intent.putParcelableArrayListExtra(FavoriteActivity.EXTRA_RECIPES_LOCAL,recipe);
                 startActivity(intent);
             }
-            else Toast.makeText(this, R.string.no_favorites, Toast.LENGTH_SHORT).show();
+            else toaster.shortToast(getString(R.string.no_favorites));
         }
         else
         {
             permission.requestPermission( getString(R.string.storage_permission), WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
-
 
     //bron: https://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
     private boolean isEmpty(EditText etText) {
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if (send.resolveActivity(getPackageManager()) != null)
                 startActivity(send);
             else
-                Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+                toaster.shortToast(getString(R.string.no_valid_browser));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.savethefood;
+package com.example.savethefood.GlobalUse;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

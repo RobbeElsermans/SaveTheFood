@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.savethefood.Favorite.FavoriteActivity;
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.MainActivity;
 import com.example.savethefood.Permissions.Permission;
 import com.example.savethefood.R;
@@ -47,6 +48,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView mNutrisionsName;
     private TextView mNutritionsUnits;
 
+    private Toaster toaster;
+
     private Permission permission;
 
     private jsonConverter jsonConverter;
@@ -59,6 +62,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
 
+        toaster = new Toaster(this);
         permission = new Permission(this);
 
         receiveIntent();
@@ -287,12 +291,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 goToWebsite();
                 return true;
             case R.id.action_favorite:
-                try {
-                    addToFavorites();
-                    Toast.makeText(this, R.string.add_to_favorites, Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                 addToFavorites();
+                 toaster.shortToast(getString(R.string.add_to_favorites));
                 return true;
             case R.id.action_share:
                 share();
@@ -315,24 +315,44 @@ public class SingleRecipeActivity extends AppCompatActivity {
         if (send.resolveActivity(getPackageManager()) != null)
             startActivity(send);
         else
-            Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+            toaster.shortToast(getString(R.string.no_valid_browser));
     }
 
-    public void addToFavorites() throws IOException
-    {
+    private void addToFavorites() {
         if (permission.hasPermissionWriteStorage())
         {
-            String text = jsonConverter.toStringConverter(mRecipe);
-
-            fileStream.writeRecipeToFile(text);
+            if(!checkIfFavoriteExist(mRecipe))
+            {
+                String text = jsonConverter.toStringConverter(mRecipe);
+                try {
+                    fileStream.writeRecipeToFile(text);
+                }catch (IOException e)
+                {
+                    toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
+                }
+            }
+            else toaster.shortToast(getString(R.string.already_add_to_favorites));
         }
-        else
-        {
-            permission.requestPermission(getString(R.string.storage_permission), MainActivity.WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
+        else permission.requestPermission(getString(R.string.storage_permission), MainActivity.WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
-    public void share() {
+    private boolean checkIfFavoriteExist(Recipe singleRecipe) {
+        ArrayList<Recipe> recipes;
+        try {
+             recipes = jsonConverter.toRecipeObjects(fileStream.readFromFile());
+            if (recipes != null && recipes.contains(singleRecipe))
+            {
+                return true;
+            }
+        }
+        catch (IOException e)
+        {
+            toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
+        }
+        return false;
+    }
+
+    private void share() {
 
         if (mRecipe.getWebsiteUrl() != null) {
             Intent send = new Intent();

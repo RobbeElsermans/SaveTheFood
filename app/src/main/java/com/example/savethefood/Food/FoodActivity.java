@@ -18,6 +18,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.example.savethefood.Food.Model.FoodInfo;
 import com.example.savethefood.Food.Model.Nutri;
 import com.example.savethefood.Food.Model.NutriScoreData;
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.RecipeActivity;
 import com.example.savethefood.Scanner.ScannerActivity;
@@ -39,6 +40,8 @@ public class FoodActivity extends AppCompatActivity {
     private Intent recieveBarcode;
     private Intent searchKey;
 
+    private Toaster mToaster;
+
     private TextView mNutriScore;
     private TextView mNutriName;
     private TextView mNutriUnit;
@@ -58,16 +61,16 @@ public class FoodActivity extends AppCompatActivity {
 
     private Intent cameraScan;
     private String barcodeText;
-    private String url = "https://world.openfoodfacts.org/api/v0/product/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
+        mToaster = new Toaster(this);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://world.openfoodfacts.org/api/v0/product/")
+                .baseUrl(getString(R.string.url_api_openfoodfacts))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiBarcode = retrofit.create(FoodAPI.class);
@@ -89,7 +92,6 @@ public class FoodActivity extends AppCompatActivity {
         mNutriName = findViewById(R.id.textview_nutri_name);
         mNutriUnit = findViewById(R.id.textview_nutri_unit);
 
-
         urlProduct = findViewById(R.id.imageView_picture_food);
         productName = findViewById(R.id.textview_product_name);
         editTextProductName = findViewById(R.id.editText_product_name);
@@ -109,13 +111,13 @@ public class FoodActivity extends AppCompatActivity {
 
         barcodeText = recieveBarcode.getStringExtra(ScannerActivity.EXTRA_RETURN_BARCODE);
 
-        barcode.setText("barcode: " + barcodeText);
+        barcode.append(barcodeText);
 
         retrieveInfo();
     }
 
     public void retrieveInfo() {
-        Call<FoodInfo> call = ApiBarcode.getPosts(barcodeText.toString());
+        Call<FoodInfo> call = ApiBarcode.getPosts(barcodeText);
 
         call.enqueue(new Callback<FoodInfo>() {
             @Override
@@ -282,9 +284,10 @@ public class FoodActivity extends AppCompatActivity {
                         }
                     }
 
-                } else {
-                    Log.d("MainFail", R.string.not_in_database + String.valueOf(response.code()));
-                    Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Log.d(this.toString(), R.string.not_in_database + String.valueOf(response.code()));
+                    mToaster.shortToast(getString(R.string.not_in_database));
                     startActivity(new Intent(FoodActivity.this, ScannerActivity.class));
                     finish();
                 }
@@ -292,8 +295,8 @@ public class FoodActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FoodInfo> call, Throwable t) {
-                Log.d("MainFail", R.string.not_responding_database + t.getMessage());
-                Toast.makeText(FoodActivity.this, R.string.not_in_database, Toast.LENGTH_SHORT).show();
+                Log.d(this.toString(), R.string.not_responding_database + t.getMessage());
+                mToaster.shortToast(getString(R.string.not_in_database));
                 finish();
             }
         });
@@ -312,7 +315,7 @@ public class FoodActivity extends AppCompatActivity {
         if (!isEmpty(editTextProductName)) {
             searchKey.putExtra(RecipeActivity.EXTRA_Recieve_SearchKey, editTextProductName.getText().toString());
             startActivity(searchKey);
-        } else Toast.makeText(this, R.string.no_search_key, Toast.LENGTH_SHORT).show();
+        } else mToaster.shortToast(getString(R.string.no_search_key));
     }
 
     private boolean isEmpty(EditText etText) {
@@ -329,7 +332,7 @@ public class FoodActivity extends AppCompatActivity {
         if (page != null) {
             Intent send = new Intent(Intent.ACTION_VIEW, page);
             if (send.resolveActivity(getPackageManager()) != null) startActivity(send);
-            else Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+            else mToaster.shortToast(getString(R.string.no_valid_browser));
         }
     }
 }

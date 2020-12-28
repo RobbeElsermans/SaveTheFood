@@ -8,17 +8,18 @@
     <string name="textV_name">NAME:</string>
     <string name="btn_search">search</string>
     <string name="recipe_search_hint">Enter a product</string>
-    <string name="Initial_Text_Product_Name">retrieving data from Database</string>
+    <string name="Initial_Text_Product_Name">Retrieving data from Database</string>
     <string name="source_of_recipe">Source of recipe</string>
     <string name="camera_permission">This app needs access to your camera so it can take pictures of ingredients.</string>
     <string name="internet_permission">This app needs access to your internet connection so it can search for recipes and ingredients in our database.</string>
     <string name="storage_permission">This app needs access to your storage to store favorite recipes offline</string>
-    <string name="no_search_key">please enter a search key!</string>
+    <string name="no_search_key">Please enter a search key!</string>
     <string name="no_internet_connection">Please enable internet connectivity for best experience</string>
     <string name="no_valid_browser">No valid browser found!</string>
-    <string name="not_in_database">not found in database!</string>
-    <string name="not_responding_database">database not responding! Check for internet connection.</string>
-    <string name="try_again_connecting">database not responding! Trying again </string>
+    <string name="not_in_database">Not found in database!</string>
+    <string name="not_responding_database">Database not responding! Check for internet connection.</string>
+    <string name="try_again_connecting">Database not responding! Trying again </string>
+    <string name="something_went_wrong">Something went wrong!</string>
     <string name="heading_nutriments">nutritional value</string>
     <string name="heading_ingredients">Ingredients</string>
     <string name="barcode">barcode</string>
@@ -63,6 +64,8 @@
     <string name="url_openfoodfacts_nova_info">https://world.openfoodfacts.org/nova</string>
     <string name="url_edamam">https://www.edamam.com/</string>
     <string name="url_openfoodfacts">https://be-en.openfoodfacts.org/</string>
+    <string name="url_api_edamam">https://api.edamam.com/</string>
+    <string name="url_api_openfoodfacts">https://world.openfoodfacts.org/api/v0/product/</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="amount_recipes_title">Amount of search items</string>
     <string name="action_settings">Settings</string>
@@ -70,7 +73,8 @@
     <string name="snack_bar_text">Are you sure you want to delete this?</string>
     <string name="snack_bar_undo">undo</string>
     <string name="no_favorites">No favorites!</string>
-    <string name="add_to_favorites">added to favorites!</string>
+    <string name="add_to_favorites">Added to favorites!</string>
+    <string name="already_add_to_favorites">Already added to favorites!</string>
 
 
 </resources>

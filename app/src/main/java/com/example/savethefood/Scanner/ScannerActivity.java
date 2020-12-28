@@ -11,7 +11,8 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.savethefood.Food.FoodActivity;
-import com.example.savethefood.NetworkCheck;
+import com.example.savethefood.GlobalUse.NetworkCheck;
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.R;
 import com.google.zxing.Result;
 
@@ -20,7 +21,6 @@ https://github.com/yuriy-budiyev/code-scanner
 https://androiddvlpr.com/zxing-android-example/
 https://androidhiro.com/source/android/example/code-scanner/5610
 https://androiddvlpr.com/zxing-android-example/
-
  */
 
 public class ScannerActivity extends AppCompatActivity {
@@ -37,18 +37,15 @@ public class ScannerActivity extends AppCompatActivity {
 
         if (!NetworkCheck.getInstance(this).isOnline())
         {
-            Toast.makeText(this,"Please enable internet connectivity for best experience",Toast.LENGTH_LONG).show();
+            new Toaster(this).longToast(getString(R.string.no_internet_connection));
             finish();
         }
-
-        Intent ReceiveIntent = getIntent();
 
         setContentView(R.layout.activity_scanner);
         scannerview = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerview);
 
         returnBarcode = new Intent(this, FoodActivity.class);
-
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -57,7 +54,6 @@ public class ScannerActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         returnBarcode.putExtra(EXTRA_RETURN_BARCODE, result.getText());
                         startActivity(returnBarcode);
                         finish();
