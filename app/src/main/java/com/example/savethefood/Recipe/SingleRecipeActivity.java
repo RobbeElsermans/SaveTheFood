@@ -292,7 +292,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 return true;
             case R.id.action_favorite:
                  addToFavorites();
-                 toaster.shortToast(getString(R.string.add_to_favorites));
                 return true;
             case R.id.action_share:
                 share();
@@ -326,6 +325,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 String text = jsonConverter.toStringConverter(mRecipe);
                 try {
                     fileStream.writeRecipeToFile(text);
+                    toaster.shortToast(getString(R.string.add_to_favorites));
                 }catch (IOException e)
                 {
                     toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
@@ -340,9 +340,19 @@ public class SingleRecipeActivity extends AppCompatActivity {
         ArrayList<Recipe> recipes;
         try {
              recipes = jsonConverter.toRecipeObjects(fileStream.readFromFile());
-            if (recipes != null && recipes.contains(singleRecipe))
+            if (recipes != null && !recipes.isEmpty())
             {
-                return true;
+                if(recipes.size() > 1)
+                for (int x = 0; x < recipes.size() -1; x++)
+                {
+                    if (recipes.get(x).getLabel().equals(singleRecipe.getLabel()))
+                        return true;
+                }
+                else
+                {
+                    if (recipes.get(0).getLabel().equals(singleRecipe.getLabel()))
+                        return true;
+                }
             }
         }
         catch (IOException e)

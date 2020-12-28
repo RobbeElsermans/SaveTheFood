@@ -36,8 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FoodActivity extends AppCompatActivity {
 
-    //private BarcodeInfo data;
-    private Intent recieveBarcode;
     private Intent searchKey;
 
     private Toaster mToaster;
@@ -46,13 +44,11 @@ public class FoodActivity extends AppCompatActivity {
     private TextView mNutriName;
     private TextView mNutriUnit;
     private TextView mNovaGroup;
-    private TextView barcode;
     private TextView nutriscore;
     private ImageView urlProduct;
     private ImageView nutriGrade;
     private TextView productName;
     private EditText editTextProductName;
-    private RequestBuilder requestBuilder;
 
     private LinearLayout mNovaGroupPos;
     private LinearLayout mNutriScorePos;
@@ -87,7 +83,7 @@ public class FoodActivity extends AppCompatActivity {
                 .animate(android.R.anim.fade_in)
                 .listener(new SvgSoftwareLayerSetter<Uri>());
 */
-        barcode = findViewById(R.id.textview_barcode);
+        TextView barcode = findViewById(R.id.textview_barcode);
         nutriscore = findViewById(R.id.textview_nutriscore);
         mNutriName = findViewById(R.id.textview_nutri_name);
         mNutriUnit = findViewById(R.id.textview_nutri_unit);
@@ -107,7 +103,8 @@ public class FoodActivity extends AppCompatActivity {
         cameraScan = new Intent(this, ScannerActivity.class);
         searchKey = new Intent(this, RecipeActivity.class);
 
-        recieveBarcode = getIntent();
+        //private BarcodeInfo data;
+        Intent recieveBarcode = getIntent();
 
         barcodeText = recieveBarcode.getStringExtra(ScannerActivity.EXTRA_RETURN_BARCODE);
 
@@ -144,7 +141,6 @@ public class FoodActivity extends AppCompatActivity {
 
     private void setContent(Response<FoodInfo> response)
     {
-
             //Bron: https://stackoverflow.com/questions/9366280/android-round-to-2-decimal-places
             DecimalFormat format = new DecimalFormat("#.##");
 
