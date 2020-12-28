@@ -108,7 +108,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     private void showUndoSnackbar() {
         //View view = View.findViewById(R.id.coordinator_layout);
-        Snackbar snackbar = Snackbar.make(mRootview, R.string.snack_bar_text, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(mRootview, R.string.snack_bar_text, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE);
         snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete());
         snackbar.show();
     }

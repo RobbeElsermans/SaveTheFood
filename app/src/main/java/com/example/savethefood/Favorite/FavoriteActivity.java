@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.MainActivity;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Recipe;
@@ -28,6 +29,8 @@ public class FavoriteActivity extends AppCompatActivity implements RecipeListAda
     private RecipeListAdapter mRecipesListAdapter;
     private ItemTouchHelper itemTouchHelper;
 
+    private Toaster mToaster;
+
     private ArrayList<Recipe> recipes = new ArrayList<>();
 
     private com.example.savethefood.SaveData.jsonConverter jsonConverter;
@@ -40,6 +43,8 @@ public class FavoriteActivity extends AppCompatActivity implements RecipeListAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
+
+        mToaster = new Toaster(this);
 
         mRecyclerView = findViewById(R.id.recyclerview);
         mPretext = findViewById(R.id.textView_PreText);
@@ -74,7 +79,12 @@ public class FavoriteActivity extends AppCompatActivity implements RecipeListAda
     private void receiveIntent()
     {
         Bundle bundle = getIntent().getExtras();
-        recipes = bundle.getParcelableArrayList(EXTRA_RECIPES_LOCAL);
+        if (bundle != null)
+            recipes = bundle.getParcelableArrayList(EXTRA_RECIPES_LOCAL);
+        else {
+            mToaster.shortToast(getString(R.string.no_favorites));
+            finish();
+        }
     }
 
 

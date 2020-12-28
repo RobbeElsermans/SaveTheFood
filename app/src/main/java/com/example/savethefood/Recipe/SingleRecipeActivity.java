@@ -4,20 +4,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.example.savethefood.Favorite.FavoriteActivity;
 import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.MainActivity;
 import com.example.savethefood.Permissions.Permission;
@@ -30,8 +27,6 @@ import com.example.savethefood.SaveData.jsonConverter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class SingleRecipeActivity extends AppCompatActivity {
     public final static String EXTRA_Single_Recipe = "com.example.SingleRecipeActivity.SingleRecipe";
@@ -48,7 +43,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView mNutrisionsName;
     private TextView mNutritionsUnits;
 
-    private Toaster toaster;
+    private Toaster mToaster;
 
     private Permission permission;
 
@@ -62,7 +57,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
 
-        toaster = new Toaster(this);
+        mToaster = new Toaster(this);
         permission = new Permission(this);
 
         receiveIntent();
@@ -314,7 +309,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         if (send.resolveActivity(getPackageManager()) != null)
             startActivity(send);
         else
-            toaster.shortToast(getString(R.string.no_valid_browser));
+            mToaster.shortToast(getString(R.string.no_valid_browser));
     }
 
     private void addToFavorites() {
@@ -325,13 +320,13 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 String text = jsonConverter.toStringConverter(mRecipe);
                 try {
                     fileStream.writeRecipeToFile(text);
-                    toaster.shortToast(getString(R.string.add_to_favorites));
+                    mToaster.shortToast(getString(R.string.add_to_favorites));
                 }catch (IOException e)
                 {
-                    toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
+                    mToaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
                 }
             }
-            else toaster.shortToast(getString(R.string.already_add_to_favorites));
+            else mToaster.shortToast(getString(R.string.already_add_to_favorites));
         }
         else permission.requestPermission(getString(R.string.storage_permission), MainActivity.WRITE_STORAGE_PERM, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
@@ -342,22 +337,16 @@ public class SingleRecipeActivity extends AppCompatActivity {
              recipes = jsonConverter.toRecipeObjects(fileStream.readFromFile());
             if (recipes != null && !recipes.isEmpty())
             {
-                if(recipes.size() > 1)
-                for (int x = 0; x < recipes.size() -1; x++)
+                for (int x = 0; x < recipes.size(); x++)
                 {
                     if (recipes.get(x).getLabel().equals(singleRecipe.getLabel()))
-                        return true;
-                }
-                else
-                {
-                    if (recipes.get(0).getLabel().equals(singleRecipe.getLabel()))
                         return true;
                 }
             }
         }
         catch (IOException e)
         {
-            toaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
+            mToaster.shortToast(getString(R.string.something_went_wrong) + e.toString());
         }
         return false;
     }

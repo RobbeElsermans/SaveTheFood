@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.savethefood.GlobalUse.Toaster;
 import com.example.savethefood.MainActivity;
 import com.example.savethefood.R;
 import com.example.savethefood.Recipe.Model.Nutrients;
@@ -41,10 +42,14 @@ public class SingleFavoriteActivity extends AppCompatActivity {
     private TextView mNutritionsUnits;
     private Recipe mRecipe;
 
+    private Toaster mToaster;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_favorite);
+
+        mToaster = new Toaster(this);
 
         receiveIntent();
 
@@ -56,7 +61,17 @@ public class SingleFavoriteActivity extends AppCompatActivity {
 
     private void receiveIntent() {
         Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
         mRecipe = bundle.getParcelable(EXTRA_Single_Recipe_Local);
+        else {
+            mToaster.shortToast(getString(R.string.no_favorites));
+            finish();
+        }
+        if (mRecipe == null)
+        {
+            mToaster.shortToast(getString(R.string.no_favorites));
+            finish();
+        }
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -71,14 +86,14 @@ public class SingleFavoriteActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void goToWebsite() {
+    private void goToWebsite()
+    {
         String url = mRecipe.getWebsiteUrl();
         Uri page = Uri.parse(url);
         Intent send = new Intent(Intent.ACTION_VIEW, page);
         if (send.resolveActivity(getPackageManager()) != null)
             startActivity(send);
-        else
-            Toast.makeText(this, R.string.no_valid_browser, Toast.LENGTH_SHORT).show();
+        else mToaster.shortToast(getString(R.string.no_valid_browser));
     }
     public void share() {
 
@@ -97,7 +112,6 @@ public class SingleFavoriteActivity extends AppCompatActivity {
         if (view.getId() == R.id.btn_search_recipe)
             goToWebsite();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,16 +136,13 @@ public class SingleFavoriteActivity extends AppCompatActivity {
         Glide.with(this).load(mRecipe.getImage()).into(mRecipeImage);
         mSourceRecipe.setText(mRecipe.getSource());
 
-        String name = "";
-        String value = "";
-        String unit = "";
+        String name;
+        String value;
+        String unit;
         StringBuilder number = new StringBuilder();
         StringBuilder instruction = new StringBuilder();
-        name = String.valueOf(mRecipe.getIngredientLines().length) + "  " + getResources().getString(R.string.heading_ingredients);
+        name = mRecipe.getIngredientLines().length + "  " + getResources().getString(R.string.heading_ingredients);
         mIngredientTitle.setText(name);
-
-
-        name = "";
 
         for (int x = 0; x < mRecipe.getIngredientLines().length; x++) {
             number.append(x + 1).append(") ").append(getResources().getString(R.string.line_ending));
